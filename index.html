@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./Assets/style.css">
     <title>gitGud</title>
 </head>
 <body>
-    <heading>
+    <header>
         <h1 class="title">gitGud</h1>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-info" role="navigation" aria-label="main navigation">
         <div id="navbarBasicExample" class="navbar-menu navbar-end">
           <div class="navbar-end">
             <a class="navbar-item" href="">
@@ -33,7 +36,7 @@
                   Lex Matthews
                 </a>
                 <a class="navbar-item">
-                  Molly Van Behren
+                  Molly Von Behren
                 </a>
                 <a class="navbar-item">
                   Candace Robbins
@@ -41,10 +44,68 @@
               </div>
             </div>
           </div>
-        </heading>
-    
-    
+    </header>
 
-    <script type="text/javascript" src="./Assets/script.js"></script>
+    <main>
+      <div class="columns mContent">
+        <section class="column is-one-quarter uInput">
+          <div class="finder">
+            <h4>Find A Game</h4>
+            <form id="gameFind">
+              <label>Platform</label>
+              <div class="select is-rounded">
+                <select id="sPlat">
+                  <option data-platform="pc">PC</option>
+                  <option data-platform="all">All</option>
+                </select>
+              </div>
+              <label>Genre</label>
+              <div class="select is-rounded">
+                <select id="sGenre">
+                  <option data-genre="shooter.first-person">FPS</option>
+                  <option data-genre="shooter.battle-royale">Battle Royale</option>
+                  <option data-genre="open-world">Open World</option>
+                  <option data-genre="moba">MOBA</option>
+                  <option data-genre="mmorpg">MMORPG</option>
+                  <option data-genre="mmofps">MMOFPS</option>
+                  <option data-genre="fighting">Fighting</option>
+                  <option data-genre="card">Card Game</option>
+                  <option data-genre="strategy">Strategy</option>
+                  <option data-genre="tower-defense">Tower Defense</option>
+                </select>
+              </div>
+              <input type="submit" id="formSubmit">
+            </form>
+          </div>
+          <div class="gamesList">
+            <ol id="games">
+
+            </ol>
+          </div>
+        </section>
+        <section class="column is-parent">
+          <article id="top5" class="box is-child">
+             <figure>
+               <img src="">
+             </figure>
+          </article>
+        
+          <article id="gameInfo" class="box is-child">
+           </article>
+        </section>
+      </div>
+        <section id="gamePic" class="column is-parent is-one-quarter">
+          <figure>
+            <img id="gameImage" src="">
+          </figure>
+ 
+        </section>
+    </main>
+   
+
+<script rel="script" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script rel="script" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./Assets/script.js"></script>
+
 </body>
 </html>

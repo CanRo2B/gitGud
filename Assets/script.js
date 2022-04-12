@@ -1,13 +1,23 @@
 const gamesArray =[]
+//global variables for the twitch authorization
+const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
+const twitchSecretId= "axxonlvfp1hw6c4omorwefqwjno7o0";
+var twitchUrl = "https://api.twitch.tv/helix/"
+
 
 //placeholder variables until user input is hooked up
 let platformVar = "pc"
 let categoryVar = "shooter"
 
-categoryOptions= ["shooter.first-person" , "shooter.battle-royale" , "open-world" , "mmorpg" , "mmofps" , "fighting" , "strategy" , "tower-defense"]
+//placeholder variables until user input is hooked up
+let platformVar = "pc";
+let categoryVar = "shooter";
+
+var formEl= $("#gameFind");
+
 
 function free2GameFetch(platform, category,){
-    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&tag=${category}&sort-by=popularity`
+    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&tags=${category}&sort-by=popularity`
 
     return fetch(url)
     .then(function(res){
@@ -19,26 +29,18 @@ function free2GameFetch(platform, category,){
     })
 }
 
-// function chooseGenre(event){
-//     var genre = event.${"event"}
-// }
-
-async function createGameList(){
-gameFetch = await free2GameFetch(platformVar , categoryVar)
+async function createGameList(x,y){
+gameFetch = await free2GameFetch(x , y);
+  
+  
 for (i = 0; i < 10; i++){
     gamesArray.push(gameFetch[i].title)
 }
 console.log(gamesArray)
 }
 
+//testing
 createGameList();
-
-//var language = event.target.getAttribute('data-language');
-
-
-const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
-const twitchSecretId= "axxonlvfp1hw6c4omorwefqwjno7o0";
-var twitchUrl = "https://api.twitch.tv/helix/"
 
 
 //this function makes the access token that is recquired each time we fetch from twitch
@@ -97,3 +99,40 @@ async function fetchGameId(){
 }
 
 fetchGameId()
+
+formEl.on("submit", function(event){
+    event.preventDefault();
+    var pSelected= $('#sPlat').find(":selected");
+    var gSelected= $('#sGenre').find(":selected");
+    var platform= pSelected[0].dataset.platform;
+    var genre= gSelected[0].dataset.genre;
+    createGameList(platform, genre);
+});
+
+
+const gamesArray =[]
+
+
+function free2GameFetch(platform, category,){
+    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
+
+    return fetch(url)
+    .then(function(res){
+        return res.json();
+    })
+    .then(function(data){
+        //console.log(data)
+        return data
+    })
+}
+
+async function createGameList(){
+gameFetch = await free2GameFetch(platformVar , categoryVar)
+for (i = 0; i < 10; i++){
+    gamesArray.push(gameFetch[i].title)
+}
+console.log(gamesArray)
+}
+
+createGameList();
+
