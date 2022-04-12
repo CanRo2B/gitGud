@@ -23,10 +23,41 @@ body{
 header{
     height: 20%;
     width: 100%;
+    background-color: var(--lsBlue);
+    color: var(--fLilac);
+}
+
+h1 {
+    justify-content: center; 
+    flex-direction: row;
+}
+
+h4{
+    color: var(--aViolet);
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: inherit;
+}
+
+.nav-bar {
+    justify-content: center;
+    flex-direction: row;
 }
 
 main{
     height: 80%;
+    width: 100%;
+    margin:0;
+    padding:0;
+    background-color: var(--onyx);
+}
+
+.mContent{
+    height: 100%;
     width: 100%;
 }
 
@@ -37,20 +68,38 @@ section{
 form{
     display: flex;
     flex-flow: column nowrap;
+    color: var(--alabaster);
 }
 
 select{
     width: 100%;
 }
 
+.uInput{
+    border-right: 2px solid var(--lsBlue);
+}
+
 .finder{
+    height: 40%;
     padding-left: 10px;
+    padding-right: 4px;
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
 }
 
 .gamesList{
+    height: 60%;
+    margin-left: 10px;
+    margin-right: 4px;
+    background-color: var(--alabaster);
+}
+
+#formSubmit{
+    margin-top: 5px;
+    background-color: var(--fLilac);
+    color: var(--onyx);
+    border: 0.5px solid var(--alabaster);
     padding-left: 10px;
 
 
@@ -99,4 +148,5 @@ nav{
     border: 2pt solid var(--onyx);
     height: 250pt;
     width: 200pt;
+
 }
