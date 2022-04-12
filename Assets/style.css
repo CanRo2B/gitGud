@@ -52,4 +52,22 @@ select{
 
 .gamesList{
     padding-left: 10px;
+
+
+h1 {
+    justify-content: center; 
+    flex-direction: row;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.nav-bar {
+    justify-content: center;
+    flex-direction: row;
+
 }
