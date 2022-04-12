@@ -1,11 +1,11 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 :root{
-    --lsBlue:#8CC8EE;
-    --alabaster:#E2E8DD;
-    --onyx:#373E40;
-    --aViolet:#B17FC7;
-    --fLilac:#8B62A5;
+    --lsBlue: #8CC8EE;
+    --alabaster: #E2E8DD;
+    --onyx: #373E40;
+    --aViolet: #B17FC7;
+    --fLilac: #8B62A5;
 }
 
 html{
@@ -99,9 +99,14 @@ select{
     margin-top: 5px;
     background-color: var(--fLilac);
     color: var(--onyx);
+
     padding-left: 10px;
 
 }
+
+    border: 0.5px solid var(--alabaster);
+    padding-left: 10px;
+
 
 h1 {
     justify-content: center; 
@@ -136,7 +141,10 @@ nav{
 
 #gamePic {
     border: 1pt solid var(--onyx);
+
 }
+
+
 
 #top-5{
     border: 2pt solid var(--onyx);
@@ -149,4 +157,7 @@ nav{
     border: 2pt solid var(--onyx);
     height: 250pt;
     width: 200pt;
+
+
+
 }
