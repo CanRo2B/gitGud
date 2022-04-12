@@ -32,6 +32,27 @@ main{
 
 section{
     height:100%;
+}
+
+form{
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+select{
+    width: 100%;
+}
+
+.finder{
+    padding-left: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+}
+
+.gamesList{
+    padding-left: 10px;
+
 
 h1 {
     justify-content: center; 
