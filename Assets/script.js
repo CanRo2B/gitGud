@@ -1,18 +1,29 @@
-// let clinetId = "CLIENT_ID_HERE";
-// let clinetSecret = "CLINET_SECRET_HERE";
+const gamesArray =[]
 
-// function getTwitchAuthorization() {
-//     let url = `https://id.twitch.tv/oauth2/token?client_id=${clinetId}&client_secret=${clinetSecret}&grant_type=client_credentials`;
+//placeholder variables until user input is hooked up
+let platformVar = "pc"
+let categoryVar = "shooter"
 
-//     fetch(url, {
-//     method: "POST",
-//     })
-//     .then((res) => res.json())
-//     .then((data) => handleAuthorization(data));
-// }
 
-// function handleAuthorization(data) {
-//     let { access_token, expires_in, token_type } = data;
-//     document.write(`${token_type} ${access_token}`);
-// }
-//getTwitchAuthorization();
+function free2GameFetch(platform, category,){
+    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
+
+    return fetch(url)
+    .then(function(res){
+        return res.json();
+    })
+    .then(function(data){
+        //console.log(data)
+        return data
+    })
+}
+
+async function createGameList(){
+gameFetch = await free2GameFetch(platformVar , categoryVar)
+for (i = 0; i < 10; i++){
+    gamesArray.push(gameFetch[i].title)
+}
+console.log(gamesArray)
+}
+
+createGameList();

@@ -45,14 +45,49 @@
 
     <main class="columns">
         <section class="column is-one-quarter">
+          <div class="finder">
+            <h4>Find A Game</h4>
+            <form>
+              <label>Platform</label>
+              <div class="select is-rounded">
+                <select>
+                  <option data-platform="pc">PC</option>
+                  <option data-platform="all">All</option>
+                </select>
+              </div>
+              <label>Genre</label>
+              <div class="select is-rounded">
+                <select>
+                  <option data-genre="shooter.first-person">FPS</option>
+                  <option data-genre="shooter.battle-royale">Battle Royale</option>
+                  <option data-genre="open-world">Open World</option>
+                  <option data-genre="moba">MOBA</option>
+                  <option data-genre="mmorpg">MMORPG</option>
+                  <option data-genre="mmofps">MMOFPS</option>
+                  <option data-genre="fighting">Fighting</option>
+                  <option data-genre="card">Card Game</option>
+                  <option data-genre="strategy">Strategy</option>
+                  <option data-genre="tower-defense">Tower Defense</option>
+                </select>
+              </div>
+              <input type="submit" id="formSubmit">
+            </form>
+          </div>
+          <div class="gamesList">
+            <ol id="games">
 
+            </ol>
+          </div>
         </section>
         <section class="column">
 
         </section>
     </main>
    
-    <script type="text/javascript" src="./Assets/script.js"></script>
+
+<script rel="script" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script rel="script" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./Assets/script.js"></script>
 
 </body>
 </html>
