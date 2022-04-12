@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="./Assets/style.css">
     <title>gitGud</title>
 </head>
@@ -48,17 +51,17 @@
         <section class="column is-one-quarter uInput">
           <div class="finder">
             <h4>Find A Game</h4>
-            <form>
+            <form id="gameFind">
               <label>Platform</label>
               <div class="select is-rounded">
-                <select>
+                <select id="sPlat">
                   <option data-platform="pc">PC</option>
                   <option data-platform="all">All</option>
                 </select>
               </div>
               <label>Genre</label>
               <div class="select is-rounded">
-                <select>
+                <select id="sGenre">
                   <option data-genre="shooter.first-person">FPS</option>
                   <option data-genre="shooter.battle-royale">Battle Royale</option>
                   <option data-genre="open-world">Open World</option>
@@ -80,14 +83,29 @@
             </ol>
           </div>
         </section>
-        <section class="column">
-
+        <section class="column is-parent">
+          <article id="top5" class="box is-child">
+             <figure>
+               <img src="">
+             </figure>
+          </article>
+        
+          <article id="gameInfo" class="box is-child">
+           </article>
         </section>
       </div>
+        <section id="gamePic" class="column is-parent is-one-quarter">
+          <figure>
+            <img id="gameImage" src="">
+          </figure>
+ 
+        </section>
     </main>
+   
 
 <script rel="script" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script rel="script" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./Assets/script.js"></script>
+
 </body>
 </html>
