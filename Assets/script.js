@@ -1,7 +1,8 @@
 //authorization keys needed to create the actual access token
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId= "axxonlvfp1hw6c4omorwefqwjno7o0";
-var endpoint = "https://api.twitch.tv/helix/streams"
+var twitchUrl = "https://api.twitch.tv/helix/"
+
 
 //this function makes the access token that is recquired each time we fetch from twitch
 function getTwitchAuthorization(){
@@ -16,7 +17,19 @@ function getTwitchAuthorization(){
     });
 }
 
+
+//these variables are to test the twitchGrab function.
+var streamEndpoint = "streams?first=5&game_id"
+var gameEndpoint = "games?name=Fortnite"
+
+testing()
 async function testing(){
+var gameArray = twitchGrab(gameEndpoint)
+gameId = await gameArray[0].id;
+console.log(gameId)
+};
+
+async function twitchGrab(endpoint){
     
     let tokenObject = await getTwitchAuthorization();
     console.log(tokenObject)
@@ -35,7 +48,9 @@ async function testing(){
         authorization, "client-Id": twitchClientId
     };
 
-    fetch(endpoint , {headers})
+    twitchEndpoint = twitchUrl + endpoint
+
+    fetch(twitchEndpoint , {headers})
     .then(function(respond){
         return respond.json()
     })
@@ -44,4 +59,3 @@ async function testing(){
     });
 }
 
-testing()
