@@ -1,4 +1,3 @@
-
 const gamesArray =[]
 
 //placeholder variables until user input is hooked up

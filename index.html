@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./Assets/style.css">
     <title>gitGud</title>
 </head>
 <body>
-    <heading>
+    <header>
         <h1 class="title">gitGud</h1>
         <nav class="navbar" role="navigation" aria-label="main navigation">
         <div id="navbarBasicExample" class="navbar-menu navbar-end">
@@ -41,10 +41,50 @@
               </div>
             </div>
           </div>
-        </heading>
-    
-    
+    </header>
 
-    <script type="text/javascript" src="./Assets/script.js"></script>
+    <main class="columns">
+        <section class="column is-one-quarter">
+          <div>
+            <h4>Find A Game</h4>
+            <form>
+              <label>Platform</label>
+              <div class="select">
+                <select>
+                  <option data-platform="pc">PC</option>
+                  <option data-platform="all">All</option>
+                </select>
+              </div>
+              <label>Genre</label>
+              <div class="select">
+                <select>
+                  <option data-genre="shooter.first-person">FPS</option>
+                  <option data-genre="shooter.battle-royale">Battle Royale</option>
+                  <option data-genre="open-world">Open World</option>
+                  <option data-genre="moba">MOBA</option>
+                  <option data-genre="mmorpg">MMORPG</option>
+                  <option data-genre="mmofps">MMOFPS</option>
+                  <option data-genre="fighting">Fighting</option>
+                  <option data-genre="card">Card Game</option>
+                  <option data-genre="strategy">Strategy</option>
+                  <option data-genre="tower-defense">Tower Defense</option>
+                </select>
+              </div>
+              <input type="submit" id="formSubmit">
+            </form>
+          </div>
+          
+
+        </section>
+        <section class="column">
+
+        </section>
+    </main>
+   
+
+<script rel="script" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script rel="script" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./Assets/script.js"></script>
+
 </body>
 </html>
