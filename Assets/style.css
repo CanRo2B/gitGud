@@ -53,6 +53,7 @@ select{
 .gamesList{
     padding-left: 10px;
 
+
 h1 {
     justify-content: center; 
     flex-direction: row;
@@ -72,11 +73,27 @@ nav{
 
 }
 
+#top5{
+    border: 2pt solid var(--onyx);
+    /* height: 250pt;
+    width: 200pt; */
+}
+
+#gameInfo {
+    border: 2pt solid var(--onyx);
+    /* height: 250pt;
+    width: 200pt; */
+}
+
+#gamePic {
+    border: 1pt solid var(--onyx);
+
 #top-5{
     border: 2pt solid var(--onyx);
     height: 250pt;
     width: 200pt;
 }
+
 
 #gameTitle {
     border: 2pt solid var(--onyx);
