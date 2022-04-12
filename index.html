@@ -45,18 +45,18 @@
 
     <main class="columns">
         <section class="column is-one-quarter">
-          <div>
+          <div class="finder">
             <h4>Find A Game</h4>
             <form>
               <label>Platform</label>
-              <div class="select">
+              <div class="select is-rounded">
                 <select>
                   <option data-platform="pc">PC</option>
                   <option data-platform="all">All</option>
                 </select>
               </div>
               <label>Genre</label>
-              <div class="select">
+              <div class="select is-rounded">
                 <select>
                   <option data-genre="shooter.first-person">FPS</option>
                   <option data-genre="shooter.battle-royale">Battle Royale</option>
@@ -73,8 +73,11 @@
               <input type="submit" id="formSubmit">
             </form>
           </div>
-          
+          <div class="gamesList">
+            <ol id="games">
 
+            </ol>
+          </div>
         </section>
         <section class="column is-parent">
           <article id="top5" class="box is-child">
