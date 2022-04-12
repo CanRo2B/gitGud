@@ -53,14 +53,19 @@ nav{
 
 }
 
-#top-5{
+#top5{
     border: 2pt solid var(--onyx);
-    height: 250pt;
-    width: 200pt;
+    /* height: 250pt;
+    width: 200pt; */
 }
 
-#gameTitle {
+#gameInfo {
     border: 2pt solid var(--onyx);
-    height: 250pt;
-    width: 200pt;
+    /* height: 250pt;
+    width: 200pt; */
+}
+
+#gamePic {
+    border: 1pt solid var(--onyx);
+
 }
