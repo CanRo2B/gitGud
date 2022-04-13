@@ -1,10 +1,10 @@
+var gamesArray =[]
 
 const imgC= $("#gameImg");
 const carouselEl= $("#top5");
 const infoC= $("#gameInfo");
 const liEl= $("#games");
 
-const gamesArray =[]
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId= "axxonlvfp1hw6c4omorwefqwjno7o0";
@@ -30,15 +30,6 @@ function free2GameFetch(platform, category,){
     })
 }
 
-async function createGameList(x,y){
-gameFetch = await free2GameFetch(x , y);
-  
-  
-for (i = 0; i < 10; i++){
-    gamesArray.push(gameFetch[i].title)
-}
-console.log(gamesArray)
-}
 
 //this function makes the access token that is recquired each time we fetch from twitch
 function getTwitchAuthorization(){
@@ -53,7 +44,15 @@ function getTwitchAuthorization(){
     });
 }
 
-
+async function createGameList(x,y){
+    gamesArray =[];
+    gameFetch = await free2GameFetch(x , y);
+    for (i = 0; i < 10; i++){
+        gamesArray.push(gameFetch[i].title)
+    }
+    console.log(gamesArray)
+    }
+    
 //these variables are to test the twitchGrab function.
 var streamEndpoint = "streams?first=5&game_id"
 var gameEndpoint = "games?name=Fortnite"
@@ -107,7 +106,7 @@ formEl.on("submit", function(event){
 });
 
 
-createGameList();
+
 
 
  //game picture 
