@@ -1,18 +1,18 @@
 var gamesArray =[]
 
+//global hooks
 const gameImageEl= document.querySelector("#gameImage");
 const carouselEl= $("#top5");
 const infoC= $("#gameInfo");
 const olEl= $("#games");
+console.log(imgC);
 
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId= "axxonlvfp1hw6c4omorwefqwjno7o0";
 var twitchUrl = "https://api.twitch.tv/helix/"
 
-//placeholder variables until user input is hooked up
-let platformVar = "pc";
-let categoryVar = "shooter";
+
 
 var formEl= $("#gameFind");
 
@@ -30,6 +30,7 @@ function free2GameFetch(platform, category,){
     })
 }
 
+//makes list of games using fetch from free2Game
 async function createGameList(x,y){
     gamesArray=[];
     olEl.empty();
@@ -43,8 +44,11 @@ async function createGameList(x,y){
         gameB.text(gameFetch[i].title);
         olEl.append(listItem);
         listItem.append(gameB);
+        gameB.on("click", function(event){
+            event.preventDefault();
+            fetchGameId(event.target.innerHTML);
+        });
     }
-    
 }
 
 //this function makes the access token that is recquired each time we fetch from twitch
@@ -60,8 +64,10 @@ function getTwitchAuthorization(){
 }
     
 //these variables are to test the twitchGrab function.
+
 var streamEndpoint = "streams?first=5&game_id"
 var gameEndpoint = "games?name="
+
 
 async function twitchGrab(endpoint){
     
@@ -93,14 +99,15 @@ async function twitchGrab(endpoint){
     });
 }
 
-// async function fetchGameId(gameOrStreams , endpoint){
-//     var twitchData = await twitchGrab(gameEndpoint)
-//     console.log(twitchData)
-//     gameId = twitchData.data[0].id
-//     return gameId
-// };
-
-// fetchGameId()
+async function fetchGameId(gameTitle){
+    var fullEndpoint =  `games?name=${gameTitle}`
+    var twitchData = await twitchGrab(fullEndpoint);
+    console.log(twitchData);
+    var gameId = twitchData.data[0].id;
+    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
+    gameImageEl.setAttribute("src", gamePic);
+    return gameId;
+}
 
 formEl.on("submit", function(event){
     event.preventDefault();
@@ -110,21 +117,6 @@ formEl.on("submit", function(event){
     var genre= gSelected[0].dataset.genre;
     createGameList(platform, genre);
 });
-
-
-async function fetchGameId(gameTitle){
-    var fullEndpoint =  `games?name=${gameTitle}`
-    var twitchData = await twitchGrab(fullEndpoint);
-    console.log(twitchData);
-    var gameId = twitchData.data[0].id;
-    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
-    console.log(gamePic);
-    gameImageEl.setAttribute("src", gamePic);
-    return gameId;
-}
-    fetchGameId("Fortnite")
-
-
   
 //     // for loop to pull Streamer Data 
 //     for (var i = 0; i < 5; i++) {
