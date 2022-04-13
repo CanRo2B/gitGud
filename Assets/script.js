@@ -1,3 +1,8 @@
+const imgC= $("#gameImg");
+const carouselEl= $("#top5");
+const infoC= $("#gameInfo");
+const liEl= $("#games");
+
 const gamesArray =[]
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
