@@ -18,7 +18,6 @@ var formEl= $("#gameFind");
 
 function free2GameFetch(platform, category,){
     var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
-    console.log(url);
 
     return fetch(url)
     .then(function(res){
@@ -33,7 +32,6 @@ function free2GameFetch(platform, category,){
 async function createGameList(x,y){
     gamesArray=[];
     olEl.empty();
-    console.log(gamesArray);
     gameFetch = await free2GameFetch(x , y);
   
     for (i = 0; i < 10; i++){
@@ -110,7 +108,6 @@ formEl.on("submit", function(event){
     var gSelected= $('#sGenre').find(":selected");
     var platform= pSelected[0].dataset.platform;
     var genre= gSelected[0].dataset.genre;
-    console.log(genre);
     createGameList(platform, genre);
 });
 
