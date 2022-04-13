@@ -1,6 +1,6 @@
 var gamesArray =[]
 
-const imgC= $("#gameImg");
+const gameImageEl= document.querySelector("#gameImage");
 const carouselEl= $("#top5");
 const infoC= $("#gameInfo");
 const olEl= $("#games");
@@ -61,7 +61,7 @@ function getTwitchAuthorization(){
     
 //these variables are to test the twitchGrab function.
 var streamEndpoint = "streams?first=5&game_id"
-var gameEndpoint = "games?name=Fortnite"
+var gameEndpoint = "games?name="
 
 async function twitchGrab(endpoint){
     
@@ -93,14 +93,14 @@ async function twitchGrab(endpoint){
     });
 }
 
-async function fetchGameId(){
-    var twitchData = await twitchGrab(gameEndpoint)
-    console.log(twitchData)
-    gameId = twitchData.data[0].id
-    console.log(gameId)
-}
+// async function fetchGameId(gameOrStreams , endpoint){
+//     var twitchData = await twitchGrab(gameEndpoint)
+//     console.log(twitchData)
+//     gameId = twitchData.data[0].id
+//     return gameId
+// };
 
-fetchGameId()
+// fetchGameId()
 
 formEl.on("submit", function(event){
     event.preventDefault();
@@ -112,31 +112,39 @@ formEl.on("submit", function(event){
 });
 
 
- //game picture 
-    gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
+async function fetchGameId(gameTitle){
+    var fullEndpoint =  `games?name=${gameTitle}`
+    var twitchData = await twitchGrab(fullEndpoint);
+    console.log(twitchData);
+    var gameId = twitchData.data[0].id;
+    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
     console.log(gamePic);
-    gameImageEl.src = gamePic; //gameImageEl = document.getElementId("gameImage") 
+    gameImageEl.setAttribute("src", gamePic);
+    return gameId;
+}
+    fetchGameId("Fortnite")
 
-    // for loop to pull Streamer Data 
-    for (var i = 0; i < 5; i++) {
-        var userName = document.createElement('h3'); //Element creation subject to change
-        var liveStatus = document.createElement('p'); //Element creation subject to change
-        var viewercount = document.createElement('p'); //Element creation subject to change
-        var link = document.createElement('a'); //Element creation subject to change
-        userName.textContent = "Username: " + twitchData.data[i].user_name;
-        liveStatus.textContent = twitchData.data[i].type.toUpperCase();
-        viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
-        link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
-        link.setAttribute("target", "_blank");
-        link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
-        // thumbnail.frameBorder = 0;
-        // thumbnail.allowFullscreen = "true";
-        // // thumbnail.scrolling = "no";
-        // thumbnail.style.height = 300;
-        // thumbnail.style.width = 400;
-        topTwitch.append(userName); // topTwitch will change via HTML id
-        topTwitch.append(liveStatus);
-        topTwitch.append(viewercount);
-        topTwitch.append(link);
-      }
 
+  
+//     // for loop to pull Streamer Data 
+//     for (var i = 0; i < 5; i++) {
+//         var userName = document.createElement('h3'); //Element creation subject to change
+//         var liveStatus = document.createElement('p'); //Element creation subject to change
+//         var viewercount = document.createElement('p'); //Element creation subject to change
+//         var link = document.createElement('a'); //Element creation subject to change
+//         userName.textContent = "Username: " + twitchData.data[i].user_name;
+//         liveStatus.textContent = twitchData.data[i].type.toUpperCase();
+//         viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
+//         link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
+//         link.setAttribute("target", "_blank");
+//         link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
+//         // thumbnail.frameBorder = 0;
+//         // thumbnail.allowFullscreen = "true";
+//         // // thumbnail.scrolling = "no";
+//         // thumbnail.style.height = 300;
+//         // thumbnail.style.width = 400;
+//         topTwitch.append(userName); // topTwitch will change via HTML id
+//         topTwitch.append(liveStatus);
+//         topTwitch.append(viewercount);
+//         topTwitch.append(link);
+//       }
