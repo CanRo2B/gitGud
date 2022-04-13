@@ -3,7 +3,7 @@ var gamesArray =[]
 const imgC= $("#gameImg");
 const carouselEl= $("#top5");
 const infoC= $("#gameInfo");
-const liEl= $("#games");
+const olEl= $("#games");
 
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
@@ -18,7 +18,7 @@ var formEl= $("#gameFind");
 
 
 function free2GameFetch(platform, category,){
-    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&tags=${category}&sort-by=popularity`
+    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
 
     return fetch(url)
     .then(function(res){
@@ -30,11 +30,26 @@ function free2GameFetch(platform, category,){
     })
 }
 
+async function createGameList(x,y){
+    gamesArray=[];
+    olEl.empty();
+    gameFetch = await free2GameFetch(x , y);
+  
+    for (i = 0; i < 10; i++){
+        gamesArray.push(gameFetch[i].title)
+        var listItem= $("<li>");
+        var gameB= $("<button>")
+        gameB.addClass("gameBtn");
+        gameB.text(gameFetch[i].title);
+        olEl.append(listItem);
+        listItem.append(gameB);
+    }
+    
+}
 
 //this function makes the access token that is recquired each time we fetch from twitch
 function getTwitchAuthorization(){
     let url = `https://id.twitch.tv/oauth2/token?client_id=${twitchClientId}&client_secret=${twitchSecretId}&grant_type=client_credentials`;
-
     return fetch(url , {method: "POST"})
     .then(function(respond){
         return respond.json()
@@ -43,15 +58,6 @@ function getTwitchAuthorization(){
         return data;
     });
 }
-
-async function createGameList(x,y){
-    gamesArray =[];
-    gameFetch = await free2GameFetch(x , y);
-    for (i = 0; i < 10; i++){
-        gamesArray.push(gameFetch[i].title)
-    }
-    console.log(gamesArray)
-    }
     
 //these variables are to test the twitchGrab function.
 var streamEndpoint = "streams?first=5&game_id"
@@ -106,9 +112,6 @@ formEl.on("submit", function(event){
 });
 
 
-
-
-
  //game picture 
     gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
     console.log(gamePic);
@@ -136,3 +139,4 @@ formEl.on("submit", function(event){
         topTwitch.append(viewercount);
         topTwitch.append(link);
       }
+

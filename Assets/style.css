@@ -71,6 +71,10 @@ form{
     color: var(--alabaster);
 }
 
+ol{
+    margin-left: 20px;
+}
+
 select{
     width: 100%;
 }
