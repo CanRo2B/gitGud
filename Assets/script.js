@@ -15,6 +15,12 @@ var twitchUrl = "https://api.twitch.tv/helix/"
 
 var formEl= $("#gameFind");
 
+//put any side effects dealing with the stream information here!!!!!!!
+async function getStreamInfo(id){
+    var fullEndpoint =  `streams?first=5&game_id=${id}`
+    var twitchData = await twitchGrab(fullEndpoint);
+}
+
 
 function free2GameFetch(platform, category,){
     var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
@@ -43,9 +49,12 @@ async function createGameList(x,y){
         gameB.text(gameFetch[i].title);
         olEl.append(listItem);
         listItem.append(gameB);
-        gameB.on("click", function(event){
+        gameB.on("click", async function(event){
             event.preventDefault();
-            fetchGameId(event.target.innerHTML);
+            var twitchGameId = await fetchGameId(event.target.innerHTML);
+            console.log(twitchGameId)
+            getStreamInfo(twitchGameId);
+            
         });
     }
 }
