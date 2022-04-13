@@ -103,13 +103,13 @@ select{
     margin-top: 5px;
     background-color: var(--fLilac);
     color: var(--onyx);
-
     padding-left: 10px;
 
 }
-
+#games{
     border: 0.5px solid var(--alabaster);
     padding-left: 10px;
+}
 
 
 h1 {
