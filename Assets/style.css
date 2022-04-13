@@ -75,6 +75,10 @@ select{
     width: 100%;
 }
 
+.title {
+    padding-top: 10pt;
+}
+
 .uInput{
     border-right: 2px solid var(--lsBlue);
 }
@@ -99,13 +103,13 @@ select{
     margin-top: 5px;
     background-color: var(--fLilac);
     color: var(--onyx);
-
     padding-left: 10px;
 
 }
-
+#games{
     border: 0.5px solid var(--alabaster);
     padding-left: 10px;
+}
 
 
 h1 {
@@ -158,6 +162,5 @@ nav{
     height: 250pt;
     width: 200pt;
 
-
-
 }
+
