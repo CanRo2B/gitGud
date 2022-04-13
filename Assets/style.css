@@ -115,6 +115,10 @@ select{
     padding-left: 10px;
 }
 
+#gameImage{
+    background-image: cover;
+}
+
 
 h1 {
     justify-content: center; 

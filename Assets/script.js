@@ -1,6 +1,6 @@
 var gamesArray =[]
 
-const imgC= $("#gameImg");
+const gameImageEl= $("#gameImage");
 const carouselEl= $("#top5");
 const infoC= $("#gameInfo");
 const olEl= $("#games");
@@ -61,7 +61,6 @@ function getTwitchAuthorization(){
     
 //these variables are to test the twitchGrab function.
 var streamEndpoint = "streams?first=5&game_id"
-var gameEndpoint = "games?name=Fortnite"
 
 async function twitchGrab(endpoint){
     
@@ -93,12 +92,13 @@ async function twitchGrab(endpoint){
     });
 }
 
-async function fetchGameId(){
+async function fetchGameId(gameName){
+    var gameEndpoint = "games?name=Fortnite"
     var twitchData = await twitchGrab(gameEndpoint)
     console.log(twitchData)
     gameId = twitchData.data[0].id
-    console.log(gameId)
-}
+    return gameId
+};
 
 fetchGameId()
 
@@ -113,10 +113,18 @@ formEl.on("submit", function(event){
 
 
  //game picture 
-    gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
+ async function uploadGamePic(){
+    twitchGameId = await fetchGameId("Fortnite")
+    gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + twitchGameId + "-300x400.jpg";
     console.log(gamePic);
-    gameImageEl.src = gamePic; //gameImageEl = document.getElementId("gameImage") 
+    //gameImageEl.src = gamePic //gameImageEl = document.getElementId("gameImage") 
+    var img = document.createElement("img")
+    img.setAttribute("src" , gamePic)
+    gameImageEl.append(img)
+ }
 
+ uploadGamePic();
+    function testing(){
     // for loop to pull Streamer Data 
     for (var i = 0; i < 5; i++) {
         var userName = document.createElement('h3'); //Element creation subject to change
@@ -139,4 +147,4 @@ formEl.on("submit", function(event){
         topTwitch.append(viewercount);
         topTwitch.append(link);
       }
-
+    }
