@@ -29,6 +29,7 @@ function free2GameFetch(platform, category,){
     })
 }
 
+//makes list of games using fetch from free2Game
 async function createGameList(x,y){
     gamesArray=[];
     olEl.empty();
@@ -61,7 +62,6 @@ function getTwitchAuthorization(){
 
 //these variables are to test the twitchGrab function.
 var streamEndpoint = "streams?first=5&game_id"
-var gameEndpoint = "games?name=Fortnite"
 
 async function twitchGrab(endpoint){
     
@@ -93,15 +93,15 @@ async function twitchGrab(endpoint){
     });
 }
 
-async function fetchGameId(){
+async function fetchGameId(gameName){
+    var gameEndpoint= `games?name=${gameName}`;
     var twitchData = await twitchGrab(gameEndpoint)
     console.log(twitchData)
     gameId = twitchData.data[0].id
     console.log(gameId)
 }
 
-fetchGameId()
-
+//form submit generates a list of games to pick
 formEl.on("submit", function(event){
     event.preventDefault();
     var pSelected= $('#sPlat').find(":selected");
@@ -109,6 +109,13 @@ formEl.on("submit", function(event){
     var platform= pSelected[0].dataset.platform;
     var genre= gSelected[0].dataset.genre;
     createGameList(platform, genre);
+});
+
+$(".gameBtn").on("click", function(event){
+    event.preventDefault();
+    var clicked= event.target;
+    console.log(clicked.text());
+    fetchGameId(clicked.text());
 });
 
 
