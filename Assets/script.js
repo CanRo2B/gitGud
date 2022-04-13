@@ -4,11 +4,6 @@ const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId= "axxonlvfp1hw6c4omorwefqwjno7o0";
 var twitchUrl = "https://api.twitch.tv/helix/"
 
-
-//placeholder variables until user input is hooked up
-let platformVar = "pc"
-let categoryVar = "shooter"
-
 //placeholder variables until user input is hooked up
 let platformVar = "pc";
 let categoryVar = "shooter";
@@ -109,22 +104,6 @@ formEl.on("submit", function(event){
     createGameList(platform, genre);
 });
 
-
-const gamesArray =[]
-
-
-function free2GameFetch(platform, category,){
-    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
-
-    return fetch(url)
-    .then(function(res){
-        return res.json();
-    })
-    .then(function(data){
-        //console.log(data)
-        return data
-    })
-}
 
 async function createGameList(){
 gameFetch = await free2GameFetch(platformVar , categoryVar)
