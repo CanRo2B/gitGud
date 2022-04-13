@@ -1,9 +1,9 @@
 const imgC= $("#gameImg");
 const carouselEl= $("#top5");
 const infoC= $("#gameInfo");
-const liEl= $("#games");
+const olEl= $("#games");
 
-const gamesArray =[]
+var gamesArray =[]
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId= "axxonlvfp1hw6c4omorwefqwjno7o0";
@@ -17,7 +17,8 @@ var formEl= $("#gameFind");
 
 
 function free2GameFetch(platform, category,){
-    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&tags=${category}&sort-by=popularity`
+    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
+    console.log(url);
 
     return fetch(url)
     .then(function(res){
@@ -30,19 +31,26 @@ function free2GameFetch(platform, category,){
 }
 
 async function createGameList(x,y){
-gameFetch = await free2GameFetch(x , y);
+    gamesArray=[];
+    olEl.empty();
+    console.log(gamesArray);
+    gameFetch = await free2GameFetch(x , y);
   
-  
-for (i = 0; i < 10; i++){
-    gamesArray.push(gameFetch[i].title)
-}
-console.log(gamesArray)
+    for (i = 0; i < 10; i++){
+        gamesArray.push(gameFetch[i].title)
+        var listItem= $("<li>");
+        var gameB= $("<button>")
+        gameB.addClass("gameBtn");
+        gameB.text(gameFetch[i].title);
+        olEl.append(listItem);
+        listItem.append(gameB);
+    }
+    
 }
 
 //this function makes the access token that is recquired each time we fetch from twitch
 function getTwitchAuthorization(){
     let url = `https://id.twitch.tv/oauth2/token?client_id=${twitchClientId}&client_secret=${twitchSecretId}&grant_type=client_credentials`;
-
     return fetch(url , {method: "POST"})
     .then(function(respond){
         return respond.json()
@@ -102,9 +110,8 @@ formEl.on("submit", function(event){
     var gSelected= $('#sGenre').find(":selected");
     var platform= pSelected[0].dataset.platform;
     var genre= gSelected[0].dataset.genre;
+    console.log(genre);
     createGameList(platform, genre);
 });
 
-
-createGameList();
 
