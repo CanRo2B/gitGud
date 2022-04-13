@@ -5,7 +5,6 @@ const gameImageEl= document.querySelector("#gameImage");
 const carouselEl= $("#top5");
 const infoC= $("#gameInfo");
 const olEl= $("#games");
-console.log(imgC);
 
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
@@ -100,7 +99,7 @@ async function twitchGrab(endpoint){
 }
 
 async function fetchGameId(gameTitle){
-    var fullEndpoint =  `games?name=${gameTitle}`
+    var fullEndpoint = `games?name=${gameTitle}`
     var twitchData = await twitchGrab(fullEndpoint);
     console.log(twitchData);
     var gameId = twitchData.data[0].id;
