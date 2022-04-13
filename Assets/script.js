@@ -34,10 +34,6 @@ for (i = 0; i < 10; i++){
 console.log(gamesArray)
 }
 
-//testing
-createGameList();
-
-
 //this function makes the access token that is recquired each time we fetch from twitch
 function getTwitchAuthorization(){
     let url = `https://id.twitch.tv/oauth2/token?client_id=${twitchClientId}&client_secret=${twitchSecretId}&grant_type=client_credentials`;
@@ -104,14 +100,6 @@ formEl.on("submit", function(event){
     createGameList(platform, genre);
 });
 
-
-async function createGameList(){
-gameFetch = await free2GameFetch(platformVar , categoryVar)
-for (i = 0; i < 10; i++){
-    gamesArray.push(gameFetch[i].title)
-}
-console.log(gamesArray)
-}
 
 createGameList();
 
