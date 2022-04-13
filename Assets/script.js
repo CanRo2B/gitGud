@@ -5,7 +5,6 @@ const gameImageEl= document.querySelector("#gameImage");
 const carouselEl= $("#top5");
 const infoC= $("#gameInfo");
 const olEl= $("#games");
-console.log(imgC);
 
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
@@ -15,6 +14,12 @@ var twitchUrl = "https://api.twitch.tv/helix/"
 
 
 var formEl= $("#gameFind");
+
+//put any side effects dealing with the stream information here!!!!!!!
+async function getStreamInfo(id){
+    var fullEndpoint =  `streams?first=5&game_id=${id}`
+    var twitchData = await twitchGrab(fullEndpoint);
+}
 
 
 function free2GameFetch(platform, category,){
@@ -44,9 +49,12 @@ async function createGameList(x,y){
         gameB.text(gameFetch[i].title);
         olEl.append(listItem);
         listItem.append(gameB);
-        gameB.on("click", function(event){
+        gameB.on("click", async function(event){
             event.preventDefault();
-            fetchGameId(event.target.innerHTML);
+            var twitchGameId = await fetchGameId(event.target.innerHTML);
+            console.log(twitchGameId)
+            getStreamInfo(twitchGameId);
+            
         });
     }
 }
