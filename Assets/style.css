@@ -75,6 +75,10 @@ select{
     width: 100%;
 }
 
+.title {
+    padding-top: 10pt;
+}
+
 .uInput{
     border-right: 2px solid var(--lsBlue);
 }
@@ -158,6 +162,5 @@ nav{
     height: 250pt;
     width: 200pt;
 
-
-
 }
+
