@@ -111,23 +111,7 @@ section{
     margin-bottom: 25px;
     height: auto;
     line-height: 3.0;
-
 }
-
-.fResults{
-    display: hidden;
-    height: inherit;
-    width: inherit;
-    margin:0;
-}
-
-.landing{
-    height: inherit;
-    width: inherit;
-    margin:0;
-}
-
-
 
 
 #gameImage{
