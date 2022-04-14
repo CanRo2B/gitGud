@@ -7,6 +7,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="./Assets/style.css">
     <title>gitGud</title>
 </head>
@@ -70,18 +72,30 @@
         </section>
         <section class="column is-parent">
           <article id="top5" class="box is-child">
-             <figure>
-               <img src="">
-             </figure>
+             <!-- Start Hero Carousel -->
+		          <section class="hero is-medium has-carousel">
+			          <div id="carousel-demo" class="hero-carousel">
+				         
+
+ 
+          
+				        
+			          </div>
+			          <div class="hero-head"></div>
+			          <div class="hero-body"></div>
+			          <div class="hero-foot"></div>
+		          </section>
+	          	<!-- End Hero Carousel -->
+
           </article>
         
           <article id="gameInfo" class="box is-child">
            </article>
         </section>
       
-        <section id="gamePic" class="column is-parent is-one-quarter">
-          <figure>
-            <img id="gameImage" >
+        <section id="gamePic" class="column is-parent is-one-quarter is-covered">
+          <figure class="is-covered">
+            <img id="gameImage">
           </figure>
         </section>
       </div>
@@ -90,6 +104,14 @@
 
 <script rel="script" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script rel="script" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+		<script>
+			bulmaCarousel.attach('#carousel-demo', {
+				slidesToScroll: 1,
+				slidesToShow: 2,
+        infinite: true,
+			});
+		</script>
 <script type="text/javascript" src="./Assets/script.js"></script>
 
 </body>
