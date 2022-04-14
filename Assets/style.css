@@ -8,8 +8,13 @@
     --midtone2: #9984D4;
 }
 
+*:not(h1){
+  font-family: 'Rubik', sans-serif;
+}
+
 *{
     overflow-wrap: normal;
+
 }
 
 html{
@@ -34,25 +39,22 @@ header{
     color: var(--midtone1);
 }
 
-h1 {
+.title {
     justify-content: center; 
+    flex-direction: row;
+    font-family: "Permanent Marker", sans-serif;
+    padding-top: 10pt;
+}
+
+
+#define{
+    justify-content: center; 
+
     flex-direction: row;
 }
 
 h4{
-    color: var(--midtone2);
-}
-
-nav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: inherit;
-}
-
-.nav-bar {
-    justify-content: center;
-    flex-direction: row;
+    color: var(--aViolet);
 }
 
 main{
@@ -72,20 +74,15 @@ section{
     height:100%;
 }
 
-form{
+#gameFind{
     display: flex;
     flex-flow: column nowrap;
     color: var(--light);
 }
 
 
-
-select{
+#sPlat{
     width: 100%;
-}
-
-.title {
-    padding-top: 10pt;
 }
 
 .uInput{
@@ -122,27 +119,6 @@ select{
     height: 100%;
 }
 
-
-h1 {
-    justify-content: center; 
-    flex-direction: row;
-}
-
-nav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
-}
-
-.nav-bar {
-    justify-content: center;
-    flex-direction: row;
-    border-bottom: 2pt solid var(--accent);
-    padding: 10pt;
-
-}
-
 #top5{
     border: 2pt solid var(--dark);
     /* height: 250pt;
@@ -160,7 +136,6 @@ nav{
     height: 100%;
 
 }
-
 
 
 #top-5{
@@ -189,10 +164,19 @@ iframe {
 
 li{
     list-style: none;
+
     background-color: var(--midtone1);
     border-bottom: var(--dark) solid;
 
+
 }
+
+.footer {
+    padding: 10px;
+    display: flex;
+    text-align: left;
+    color: black;
+  }
 
 button{
     border: none;
