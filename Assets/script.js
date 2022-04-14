@@ -36,10 +36,10 @@ async function free2GameFetch(platform, category,){
 //put any side effects dealing with the stream information here!!!!!!!
 async function getStreamInfo(id) {
     var streamersArr= [];
-    var fullEndpoint = `streams?first=5&game_id=${id}`
+    var fullEndpoint = `streams?first=3&game_id=${id}`
     var twitchData = await twitchGrab(fullEndpoint);
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 3; i++) {
         var currSData= []
         currSData.push(twitchData.data[i].user_name);
         currSData.push(twitchData.data[i].type);
@@ -186,7 +186,7 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
     infoC.innerHTML= infoTemplate;
     gameImageEl.setAttribute("src", gamePic);
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 3; i++) {
         var userN= streamInfo[i][0];
         var lStatus= streamInfo[i][1];
         var vCount= streamInfo[i][2];
@@ -207,7 +207,7 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
                     allowFullscreen="true"
                     >
                 </iframe>
-                    <a target="_blank" href="https://www.twitch.tv/${userN}">https://www.twitch.tv/${userN}</a>
+                    <a target="_blank" href="https://www.twitch.tv/${userN}">Click Here to See Stream</a>
                     <p>${lStatus}</p>
                     <p>Viewers: ${vCount}</p>
                 </div>
