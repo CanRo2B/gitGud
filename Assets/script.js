@@ -3,11 +3,11 @@ var gamesArray = []
 //global hooks
 
 const gameImageEl = document.querySelector("#gameImage");
-const carouselEl = $("#top5");
+const topTwitch = $("#top5");
 const infoC = document.querySelector("#gameInfo");
 const olEl = $("#games");
-var formEl = $("#gameFind")
-const topTwitch = $("#carousel-demo");
+const formEl = $("#gameFind")
+
 
 
 //global variables for the twitch authorization
@@ -35,36 +35,18 @@ async function free2GameFetch(platform, category,){
 
 //put any side effects dealing with the stream information here!!!!!!!
 async function getStreamInfo(id) {
+    var streamersArr= [];
     var fullEndpoint = `streams?first=5&game_id=${id}`
     var twitchData = await twitchGrab(fullEndpoint);
 
     for (var i = 0; i < 5; i++) {
-        var newDiv = document.createElement('div');
-        newDiv.id = 'streams';
-        newDiv.setAttribute("class", "item-" + i)
-        var userName = document.createElement('h4');
-        var liveStatus = document.createElement('p');
-        var viewercount = document.createElement('p');
-        var link = document.createElement('a');
-        var thumbnail = document.createElement("iframe");
-        thumbnail.setAttribute("src", "https://player.twitch.tv/?channel=" + twitchData.data[i].user_name + "&parent=https://canro2b.github.io/")
-        thumbnail.frameBorder = 0;
-        thumbnail.allowFullscreen = "true";
-        thumbnail.style.height = 300;
-        thumbnail.style.width = 400;
-        userName.textContent = "Username: " + twitchData.data[i].user_name;
-        liveStatus.textContent = twitchData.data[i].type.toUpperCase();
-        viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
-        link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
-        link.setAttribute("target", "_blank");
-        link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
-        topTwitch.append(newDiv);
-        newDiv.append(userName); // topTwitch will change via HTML
-        newDiv.append(link);
-        newDiv.append(liveStatus);
-        newDiv.append(viewercount);
-        newDiv.append(thumbnail);
+        var currSData= []
+        currSData.push(twitchData.data[i].user_name);
+        currSData.push(twitchData.data[i].type);
+        currSData.push(twitchData.data[i].viewer_count);
+        streamersArr.push(currSData);
     }
+    return streamersArr;
 }
 
 //this function makes the access token that is recquired each time we fetch from twitch
@@ -140,7 +122,7 @@ async function clickHandler(gameTitle){
     var gameID= await fetchGameId(gameTitle);
     var gameInfo= await gameInfoGrab(await free2GameFetch() ,gameTitle);
     var streamInfo= await getStreamInfo(gameID);
-    generateContent(gameTitle, gameID, gameInfo);
+    generateContent(gameTitle, gameID, gameInfo, streamInfo);
 }
 
 formEl.on("submit", function(event){
@@ -175,17 +157,20 @@ async function createGameList(x, y) {
 }
 
 //function for assembling all necessary data into page elements (need to add pass variables to assemble carousel)
-async function generateContent(gameTitle, gameID, gameInfo){
+async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
+    console.log(streamInfo);
     var platform= gameInfo[0];
     var des= gameInfo[1];
     var releaseD= gameInfo[2];
     var dev= gameInfo[3];
     var publisher= gameInfo[4];
+    
     if(gameID==="Sorry there's no twitch info for this game :("){
         var gamePic = "./Assets/img/istockphoto-1285591330-170667a.jpg";
     } else{
         var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
     }
+    
     var infoTemplate=`
     <div class="heading">
         <h3> ${gameTitle}</h3>
@@ -197,7 +182,36 @@ async function generateContent(gameTitle, gameID, gameInfo){
         <li> ${dev}</li>
         <li> ${publisher}</li>   
     </ul>`;
+    
     infoC.innerHTML= infoTemplate;
     gameImageEl.setAttribute("src", gamePic);
+
+    for (var i = 0; i < 5; i++) {
+        var userN= streamInfo[i][0];
+        var lStatus= streamInfo[i][1];
+        var vCount= streamInfo[i][2];
+        console.log(userN, lStatus, vCount);
+
+        var streamerTemp= `
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">Username: ${userN}</p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    <thumbnail 
+                    class="thumbnail"
+                    src="https://player.twitch.tv/?channel=${userN}&parent=https://canro2b.github.io/"
+                    allowFullscreen="true"
+                    >
+                </thumbnail>
+                    <a target="_blank" href="https://www.twitch.tv/${userN}">https://www.twitch.tv/${userN}</a>
+                    <p>${lStatus}</p>
+                    <p>Viewers: ${vCount}</p>
+                </div>
+            </div>
+        </div>`;
+        topTwitch.children().eq(i).html(streamerTemp);
+    }
 }
   
