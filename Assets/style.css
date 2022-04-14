@@ -93,13 +93,21 @@ main{
     line-height: 3;
 }
 
-
-
 .card{
     background-color: var(--midtone1);
 }
 
+@keyframes backgroundPan{
+    0%   {background-position: -200px -300px;}
+    20%  {background-position: -250px -350px;}
+    50%  {background-position: -200px -300px;}
+    75%  {background-position: -150px -250px;}
+}
+
 .mContent{
+    background-image:url("./img/istockphoto-1285591330-170667a.jpg");
+    background-size: cover;
+    animation: backgroundPan 45s linear infinite;
     height: fit-content;
     width: 100%;
 }
@@ -120,6 +128,7 @@ section{
 }
 
 .uInput{
+    background-color: var(--dark);
     border-right: 2px solid var(--midtone1);
 }
 
@@ -146,23 +155,7 @@ section{
     margin-bottom: 25px;
     height: auto;
     line-height: 3.0;
-
 }
-
-.fResults{
-    display: hidden;
-    height: inherit;
-    width: inherit;
-    margin:0;
-}
-
-.landing{
-    height: inherit;
-    width: inherit;
-    margin:0;
-}
-
-
 
 
 #gameImage{
