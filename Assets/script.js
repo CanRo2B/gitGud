@@ -1,20 +1,36 @@
 var gamesArray = []
 
 //global hooks
+
 const gameImageEl = document.querySelector("#gameImage");
 const carouselEl = $("#top5");
 const infoC = $("#gameInfo");
 const olEl = $("#games");
 const topTwitch = $("#carousel-demo");
 
+
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId = "axxonlvfp1hw6c4omorwefqwjno7o0";
 var twitchUrl = "https://api.twitch.tv/helix/"
+var formEl = $("#gameFind")
 
+async function free2GameFetch(platform, category,){
+    var url;
+    if(!platform && !category){
+        url= "https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games";
+    }else{
+        url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`;
+    }
 
-
-var formEl = $("#gameFind");
+    return fetch(url)
+    .then(function(res){
+        return res.json();
+    })
+    .then(function(data){
+        return data
+    })
+}
 
 //put any side effects dealing with the stream information here!!!!!!!
 async function getStreamInfo(id) {
@@ -50,44 +66,6 @@ async function getStreamInfo(id) {
     }
 }
 
-
-function free2GameFetch(platform, category,) {
-    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
-
-    return fetch(url)
-        .then(function (res) {
-            return res.json();
-        })
-        .then(function (data) {
-            //console.log(data)
-            return data
-        })
-}
-
-//makes list of games using fetch from free2Game
-async function createGameList(x, y) {
-    gamesArray = [];
-    olEl.empty();
-    gameFetch = await free2GameFetch(x, y);
-
-    for (i = 0; i < 10; i++) {
-        gamesArray.push(gameFetch[i].title)
-        var listItem = $("<li>");
-        var gameB = $("<button>")
-        gameB.addClass("gameBtn");
-        gameB.text(gameFetch[i].title);
-        olEl.append(listItem);
-        listItem.append(gameB);
-        gameB.on("click", async function (event) {
-            event.preventDefault();
-            var twitchGameId = await fetchGameId(event.target.innerHTML);
-            console.log(twitchGameId)
-            getStreamInfo(twitchGameId);
-
-        });
-    }
-}
-
 //this function makes the access token that is recquired each time we fetch from twitch
 function getTwitchAuthorization() {
     let url = `https://id.twitch.tv/oauth2/token?client_id=${twitchClientId}&client_secret=${twitchSecretId}&grant_type=client_credentials`;
@@ -100,11 +78,18 @@ function getTwitchAuthorization() {
         });
 }
 
-//these variables are to test the twitchGrab function.
 
-var streamEndpoint = "streams?first=5&game_id"
-var gameEndpoint = "games?name="
-
+async function fetchGameId(gameTitle) {
+    var fullEndpoint = `games?name=${gameTitle}`
+    var twitchData = await twitchGrab(fullEndpoint);
+    console.log(twitchData);
+    if(twitchData.data.length==0){
+        return "Sorry there's no twitch info for this game :(";
+    } else {
+        var gameId = twitchData.data[0].id;
+        return gameId;
+    }
+}
 
 async function twitchGrab(endpoint) {
 
@@ -136,17 +121,27 @@ async function twitchGrab(endpoint) {
         });
 }
 
-async function fetchGameId(gameTitle) {
-    var fullEndpoint = `games?name=${gameTitle}`
-    var twitchData = await twitchGrab(fullEndpoint);
-    console.log(twitchData);
-    var gameId = twitchData.data[0].id;
-    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
-    gameImageEl.setAttribute("src", gamePic);
-    return gameId;
+async function gameInfoGrab(raw ,chosenGame){
+    var infoArr= []
+    for(i=0;i<raw.length;i++){
+        if(raw[i].title==chosenGame){
+            infoArr.push(raw[i].platform)
+            infoArr.push(raw[i].short_description);
+            infoArr.push(raw[i].release_date);
+            infoArr.push(raw[i].developer);
+            infoArr.push(raw[i].publisher);
+            return infoArr;
+        }
+    }
 }
 
-formEl.on("submit", function (event) {
+async function clickHandler(gameTitle){
+    var gameID= await fetchGameId(gameTitle);
+    var gameInfo= await gameInfoGrab(await free2GameFetch() ,gameTitle);
+    generateContent(gameTitle, gameID, gameInfo);
+}
+
+formEl.on("submit", function(event){
     event.preventDefault();
     var pSelected = $('#sPlat').find(":selected");
     var gSelected = $('#sGenre').find(":selected");
@@ -155,3 +150,55 @@ formEl.on("submit", function (event) {
     createGameList(platform, genre);
 });
 
+<<<<<<< HEAD
+=======
+
+//makes list of games using fetch from free2Game
+async function createGameList(x, y) {
+    gamesArray = [];
+    olEl.empty();
+    gameFetch = await free2GameFetch(x, y);
+
+    for (i = 0; i < 10; i++) {
+        gamesArray.push(gameFetch[i].title)
+        var listItem = $("<li>");
+        var gameB = $("<button>")
+        gameB.addClass("gameBtn");
+        gameB.text(gameFetch[i].title);
+        olEl.append(listItem);
+        listItem.append(gameB);
+        gameB.on("click", async function (event) {
+            event.preventDefault();
+            clickHandler(event.target.innerHTML);
+        });
+    }
+}
+
+//function for assembling all necessary data into page elements (need to add pass variables to assemble carousel)
+async function generateContent(gameTitle, gameID, gameInfo){
+    var platform= gameInfo[0];
+    var des= gameInfo[1];
+    var releaseD= gameInfo[2];
+    var dev= gameInfo[3];
+    var publisher= gameInfo[4];
+    if(gameID==="Sorry there's no twitch info for this game :("){
+        var gamePic = "./Assets/img/istockphoto-1285591330-170667a.jpg";
+    } else{
+        var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
+    }
+    var infoTemplate=`
+    <div class="heading">
+        <h3> ${gameTitle}</h3>
+    </div>
+    <ul>
+        <li> ${platform}</li> 
+        <li> ${des}</li>
+        <li> ${releaseD}</li>
+        <li> ${dev}</li>
+        <li> ${publisher}</li>   
+    </ul>`;
+    infoC.innerHTML= infoTemplate;
+    gameImageEl.setAttribute("src", gamePic);
+}
+  
+>>>>>>> 24d245d67a797b3ae46f4e37e2061555bb16d7b7
