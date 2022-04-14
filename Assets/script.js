@@ -154,3 +154,4 @@ formEl.on("submit", function (event) {
     var genre = gSelected[0].dataset.genre;
     createGameList(platform, genre);
 });
+
