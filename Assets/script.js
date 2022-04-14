@@ -1,11 +1,13 @@
 var gamesArray = []
 
 //global hooks
+
 const gameImageEl = document.querySelector("#gameImage");
 const carouselEl = $("#top5");
 const infoC = $("#gameInfo");
 const olEl = $("#games");
 const topTwitch = $("#carousel-demo");
+
 
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
@@ -13,8 +15,22 @@ const twitchSecretId = "axxonlvfp1hw6c4omorwefqwjno7o0";
 var twitchUrl = "https://api.twitch.tv/helix/"
 
 
+async function free2GameFetch(platform, category,){
+    var url;
+    if(!platform && !category){
+        url= "https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games";
+    }else{
+        url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`;
+    }
 
-var formEl = $("#gameFind");
+    return fetch(url)
+    .then(function(res){
+        return res.json();
+    })
+    .then(function(data){
+        return data
+    })
+}
 
 //put any side effects dealing with the stream information here!!!!!!!
 async function getStreamInfo(id) {
@@ -50,20 +66,6 @@ async function getStreamInfo(id) {
     }
 }
 
-
-function free2GameFetch(platform, category,) {
-    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
-
-    return fetch(url)
-        .then(function (res) {
-            return res.json();
-        })
-        .then(function (data) {
-            //console.log(data)
-            return data
-        })
-}
-
 //makes list of games using fetch from free2Game
 async function createGameList(x, y) {
     gamesArray = [];
@@ -80,10 +82,7 @@ async function createGameList(x, y) {
         listItem.append(gameB);
         gameB.on("click", async function (event) {
             event.preventDefault();
-            var twitchGameId = await fetchGameId(event.target.innerHTML);
-            console.log(twitchGameId)
-            getStreamInfo(twitchGameId);
-
+            clickHandler(event.target.innerHTML);
         });
     }
 }
@@ -101,11 +100,6 @@ function getTwitchAuthorization() {
 }
 
 //these variables are to test the twitchGrab function.
-
-var streamEndpoint = "streams?first=5&game_id"
-var gameEndpoint = "games?name="
-
-
 async function twitchGrab(endpoint) {
 
     let tokenObject = await getTwitchAuthorization();
@@ -139,14 +133,31 @@ async function twitchGrab(endpoint) {
 async function fetchGameId(gameTitle) {
     var fullEndpoint = `games?name=${gameTitle}`
     var twitchData = await twitchGrab(fullEndpoint);
-    console.log(twitchData);
     var gameId = twitchData.data[0].id;
-    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
-    gameImageEl.setAttribute("src", gamePic);
     return gameId;
 }
 
-formEl.on("submit", function (event) {
+async function gameInfoGrab(raw ,chosenGame){
+    var infoArr= []
+    for(i=0;i<raw.length;i++){
+        if(raw[i].title==chosenGame){
+            infoArr.push(raw[i].platform)
+            infoArr.push(raw[i].short_description);
+            infoArr.push(raw[i].release_date);
+            infoArr.push(raw[i].developer);
+            infoArr.push(raw[i].publisher);
+            return infoArr;
+        }
+    }
+}
+
+async function clickHandler(gameTitle){
+    var gameID= await fetchGameId(gameTitle);
+    var gameInfo= await gameInfoGrab(await free2GameFetch() ,gameTitle);
+    generateContent(gameTitle, gameID, gameInfo);
+}
+
+formEl.on("submit", function(event){
     event.preventDefault();
     var pSelected = $('#sPlat').find(":selected");
     var gSelected = $('#sGenre').find(":selected");
@@ -154,3 +165,28 @@ formEl.on("submit", function (event) {
     var genre = gSelected[0].dataset.genre;
     createGameList(platform, genre);
 });
+
+//function for assembling all necessary data into page elements (need to add pass variables to assemble carousel)
+async function generateContent(gameTitle, gameID, gameInfo){
+    var platform= gameInfo[0];
+    var des= gameInfo[1];
+    var releaseD= gameInfo[2];
+    var dev= gameInfo[3];
+    var publisher= gameInfo[4];
+    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
+    var infoTemplate=`
+    <div class="heading">
+        <h3> ${gameTitle}</h3>
+    </div>
+    <ul>
+        <li> ${platform}</li> 
+        <li> ${des}</li>
+        <li> ${releaseD}</li>
+        <li> ${dev}</li>
+        <li> ${publisher}</li>   
+    </ul>`;
+    infoC.innerHTML= infoTemplate;
+    gameImageEl.setAttribute("src", gamePic);
+}
+  
+
