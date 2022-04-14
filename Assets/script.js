@@ -8,13 +8,10 @@ const infoC = document.querySelector("#gameInfo");
 const olEl = $("#games");
 const formEl = $("#gameFind")
 
-
-
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId = "axxonlvfp1hw6c4omorwefqwjno7o0";
 var twitchUrl = "https://api.twitch.tv/helix/"
-
 
 async function free2GameFetch(platform, category,){
     var url;
@@ -133,7 +130,6 @@ formEl.on("submit", function(event){
     var genre = gSelected[0].dataset.genre;
     createGameList(platform, genre);
 });
-
 
 //makes list of games using fetch from free2Game
 async function createGameList(x, y) {
