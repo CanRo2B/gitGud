@@ -26,6 +26,7 @@ html{
 
 body{
     width: 100%;
+    min-height: 100%;
     height: fit-content;
     margin:0;
     padding:0;
@@ -33,7 +34,7 @@ body{
 }
 
 header{
-    height: 20%;
+    height: fit-content;
     width: 100%;
     background-color: var(--midtone2);
     color: var(--midtone1);
@@ -58,7 +59,7 @@ h4{
 }
 
 main{
-    height: 80%;
+    height: fit-content;
     width: 100%;
     margin:0;
     padding:0;
@@ -66,7 +67,7 @@ main{
 }
 
 .mContent{
-    height: 100%;
+    height: fit-content;
     width: 100%;
 }
 
@@ -112,6 +113,21 @@ section{
     line-height: 3.0;
 
 }
+
+.fResults{
+    display: hidden;
+    height: inherit;
+    width: inherit;
+    margin:0;
+}
+
+.landing{
+    height: inherit;
+    width: inherit;
+    margin:0;
+}
+
+
 
 
 #gameImage{
@@ -175,7 +191,7 @@ li{
     padding: 10px;
     display: flex;
     text-align: left;
-    color: black;
+    color: var(--onyx);
   }
 
 button{
