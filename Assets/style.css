@@ -114,6 +114,21 @@ section{
 
 }
 
+.fResults{
+    display: hidden;
+    height: inherit;
+    width: inherit;
+    margin:0;
+}
+
+.landing{
+    height: inherit;
+    width: inherit;
+    margin:0;
+}
+
+
+
 
 #gameImage{
     width: 100%;
