@@ -33,3 +33,8 @@ The user opens the website with a form asking them what type of platform will th
 - [Website] (https://canro2b.github.io/gitGud/)
 
 ## Credits
+
+- Molly Van Behren - https://github.com/VBamalie
+- Lex Matthews - https://github.com/ArchRascal2988
+- Scott Gamit - https://github.com/sgamit09
+- Candace Robbins - https://github.com/CanRo2B
