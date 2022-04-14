@@ -131,7 +131,6 @@ section{
 }
 
 
-
 #top-5{
     border: 2pt solid var(--onyx);
     height: 250pt;
@@ -156,19 +155,18 @@ iframe {
     padding: 10px;
 }
 
-
-.footer {
-    padding: 20px;
-    text-align: center;
-    color: var(--textcolor);
-  }
-
 li{
     list-style: none;
     background-color: var(--aViolet);
     border-bottom: var(--onyx) solid;
-
 }
+
+.footer {
+    padding: 10px;
+    display: flex;
+    text-align: left;
+    color: black;
+  }
 
 button{
     border: none;
