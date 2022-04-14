@@ -2,8 +2,9 @@ var gamesArray =[]
 
 //global hooks
 const gameImageEl= document.querySelector("#gameImage");
-const carouselEl= $("#top5");
-const infoC= $("#gameInfo");
+const carouselEl= document.querySelector("#top5");
+const infoC= document.querySelector("#gameInfo");
+var formEl= $("#gameFind");
 const olEl= $("#games");
 
 //global variables for the twitch authorization
@@ -13,23 +14,24 @@ var twitchUrl = "https://api.twitch.tv/helix/"
 
 
 
-var formEl= $("#gameFind");
-
-
-function free2GameFetch(platform, category,){
-    var url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`
+async function free2GameFetch(platform, category,){
+    var url;
+    if(!platform && !category){
+        url= "https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games";
+    }else{
+        url = `https://floating-headland-95050.herokuapp.com/https://www.freetogame.com/api/games?platform=${platform}&category=${category}&sort-by=popularity`;
+    }
 
     return fetch(url)
     .then(function(res){
         return res.json();
     })
     .then(function(data){
-        //console.log(data)
         return data
     })
 }
 
-//makes list of games using fetch from free2Game
+//makes list of games using fetch from free2Game and adds event listener to each
 async function createGameList(x,y){
     gamesArray=[];
     olEl.empty();
@@ -45,7 +47,7 @@ async function createGameList(x,y){
         listItem.append(gameB);
         gameB.on("click", function(event){
             event.preventDefault();
-            fetchGameId(event.target.innerHTML);
+            clickHandler(event.target.innerHTML);
         });
     }
 }
@@ -101,11 +103,28 @@ async function twitchGrab(endpoint){
 async function fetchGameId(gameTitle){
     var fullEndpoint = `games?name=${gameTitle}`
     var twitchData = await twitchGrab(fullEndpoint);
-    console.log(twitchData);
     var gameId = twitchData.data[0].id;
-    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
-    gameImageEl.setAttribute("src", gamePic);
     return gameId;
+}
+
+async function gameInfoGrab(raw ,chosenGame){
+    var infoArr= []
+    for(i=0;i<raw.length;i++){
+        if(raw[i].title==chosenGame){
+            infoArr.push(raw[i].platform)
+            infoArr.push(raw[i].short_description);
+            infoArr.push(raw[i].release_date);
+            infoArr.push(raw[i].developer);
+            infoArr.push(raw[i].publisher);
+            return infoArr;
+        }
+    }
+}
+
+async function clickHandler(gameTitle){
+    var gameID= await fetchGameId(gameTitle);
+    var gameInfo= await gameInfoGrab(await free2GameFetch() ,gameTitle);
+    generateContent(gameTitle, gameID, gameInfo);
 }
 
 formEl.on("submit", function(event){
@@ -116,26 +135,49 @@ formEl.on("submit", function(event){
     var genre= gSelected[0].dataset.genre;
     createGameList(platform, genre);
 });
+
+//function for assembling all necessary data into page elements (need to add pass variables to assemble carousel)
+async function generateContent(gameTitle, gameID, gameInfo){
+    var platform= gameInfo[0];
+    var des= gameInfo[1];
+    var releaseD= gameInfo[2];
+    var dev= gameInfo[3];
+    var publisher= gameInfo[4];
+    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
+    var infoTemplate=`
+    <div class="heading">
+        <h3> ${gameTitle}</h3>
+    </div>
+    <ul>
+        <li> ${platform}</li> 
+        <li> ${des}</li>
+        <li> ${releaseD}</li>
+        <li> ${dev}</li>
+        <li> ${publisher}</li>   
+    </ul>`;
+    infoC.innerHTML= infoTemplate;
+    gameImageEl.setAttribute("src", gamePic);
+}
   
-//     // for loop to pull Streamer Data 
-//     for (var i = 0; i < 5; i++) {
-//         var userName = document.createElement('h3'); //Element creation subject to change
-//         var liveStatus = document.createElement('p'); //Element creation subject to change
-//         var viewercount = document.createElement('p'); //Element creation subject to change
-//         var link = document.createElement('a'); //Element creation subject to change
-//         userName.textContent = "Username: " + twitchData.data[i].user_name;
-//         liveStatus.textContent = twitchData.data[i].type.toUpperCase();
-//         viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
-//         link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
-//         link.setAttribute("target", "_blank");
-//         link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
-//         // thumbnail.frameBorder = 0;
-//         // thumbnail.allowFullscreen = "true";
-//         // // thumbnail.scrolling = "no";
-//         // thumbnail.style.height = 300;
-//         // thumbnail.style.width = 400;
-//         topTwitch.append(userName); // topTwitch will change via HTML id
-//         topTwitch.append(liveStatus);
-//         topTwitch.append(viewercount);
-//         topTwitch.append(link);
-//       }
+    // //for loop to pull Streamer Data 
+    //  for (var i = 0; i < 5; i++) {
+    //      var userName = document.createElement('h3'); //Element creation subject to change
+    //      var liveStatus = document.createElement('p'); //Element creation subject to change
+    //      var viewercount = document.createElement('p'); //Element creation subject to change
+    //      var link = document.createElement('a'); //Element creation subject to change
+    //      userName.textContent = "Username: " + twitchData.data[i].user_name;
+    //      liveStatus.textContent = twitchData.data[i].type.toUpperCase();
+    //      viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
+    //      link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
+    //      link.setAttribute("target", "_blank");
+    //      link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
+    //      thumbnail.frameBorder = 0;
+    //      thumbnail.allowFullscreen = "true";
+    //      thumbnail.scrolling = "no";
+    //      thumbnail.style.height = 300;
+    //      thumbnail.style.width = 400;
+    //      topTwitch.append(userName); // topTwitch will change via HTML id
+    //      topTwitch.append(liveStatus);
+    //      topTwitch.append(viewercount);
+    //      topTwitch.append(link);
+    //    }
