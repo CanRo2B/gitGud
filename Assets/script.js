@@ -4,8 +4,9 @@ var gamesArray = []
 
 const gameImageEl = document.querySelector("#gameImage");
 const carouselEl = $("#top5");
-const infoC = $("#gameInfo");
+const infoC = document.querySelector("#gameInfo");
 const olEl = $("#games");
+var formEl = $("#gameFind")
 const topTwitch = $("#carousel-demo");
 
 
@@ -13,7 +14,7 @@ const topTwitch = $("#carousel-demo");
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId = "axxonlvfp1hw6c4omorwefqwjno7o0";
 var twitchUrl = "https://api.twitch.tv/helix/"
-var formEl = $("#gameFind")
+
 
 async function free2GameFetch(platform, category,){
     var url;
@@ -138,6 +139,7 @@ async function gameInfoGrab(raw ,chosenGame){
 async function clickHandler(gameTitle){
     var gameID= await fetchGameId(gameTitle);
     var gameInfo= await gameInfoGrab(await free2GameFetch() ,gameTitle);
+    var streamInfo= await getStreamInfo(gameID);
     generateContent(gameTitle, gameID, gameInfo);
 }
 
