@@ -182,6 +182,14 @@ iframe {
     padding: 10px;
 }
 
+
+/* footer CSS */
+.🦶 {
+    padding: 20px;
+    text-align: center;
+    color: var(--textcolor);
+  }
+
 li{
     list-style: none;
     background-color: var(--aViolet);
@@ -195,3 +203,4 @@ button{
     min-width: 100%;
     line-height: 3.0;
 }
+
