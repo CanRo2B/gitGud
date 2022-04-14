@@ -2,7 +2,7 @@
 
 :root{
     --accent: #EE6352;
-    --light: #F2F3D9;
+    --light: #ffeedd;
     --dark: #2C092F;
     --midtone1: #CAA8F5;
     --midtone2: #9984D4;
@@ -40,6 +40,22 @@ header{
     color: var(--midtone1);
 }
 
+.footer{
+    background-color: var(--midtone2);
+    /* position: fixed; */
+
+    bottom: 0;
+    width: 100%;
+    color:var(--dark)
+    
+}
+
+
+main{
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
 .title {
     justify-content: center; 
     flex-direction: row;
@@ -61,9 +77,26 @@ h4{
 main{
     height: fit-content;
     width: 100%;
-    margin:0;
+    margin:3%, 0;
     padding:0;
 
+}
+.heading{
+    background-color: var(--midtone1);
+    color: var(--dark);
+    padding-top: 2%;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    box-shadow: 0.0125em 0.25em rgb(10, 10, 10/ 10%);
+    border-bottom: var(--accent) solid;
+    margin-bottom: 0%;
+    line-height: 3;
+}
+
+
+
+.card{
+    background-color: var(--midtone1);
 }
 
 .mContent{
@@ -78,7 +111,7 @@ section{
 #gameFind{
     display: flex;
     flex-flow: column nowrap;
-    color: var(--light);
+    color: var(--midtone1);
 }
 
 
@@ -101,11 +134,13 @@ section{
 
 .gamesList{
     height: 60%;
-    background-color: var(--light);
+    background-color: var(--midtone1);
 }
 
+
+
 #formSubmit{
-    background-color: var(--midtone1);
+    background-color: var(--accent);
     padding-left: 10px;
     margin-top: 20px;
     margin-bottom: 25px;
@@ -135,10 +170,17 @@ section{
     height: 100%;
 }
 
+article.article{
+    background-color: var(--dark);
+}
+.box{
+    padding-top: 0;
+}
 #top5{
     border: 2pt solid var(--dark);
     /* height: 250pt;
     width: 200pt; */
+    margin: 0, 2%
 }
 
 #gameInfo {
@@ -147,9 +189,17 @@ section{
     width: 200pt; */
 }
 
+.info{
+    background-color: var(--midtone1);
+    margin: 0%;
+    border: none;
+    line-height: 3;
+}
+
 #gamePic {
     border: 1pt solid var(--dark);
     height: 100%;
+    margin-top: 5%;
 
 }
 
@@ -180,10 +230,8 @@ iframe {
 
 li{
     list-style: none;
-
     background-color: var(--midtone1);
     border-bottom: var(--dark) solid;
-
 
 }
 
@@ -199,5 +247,7 @@ button{
     min-height: 100%;
     min-width: 100%;
     line-height: 3.0;
+    background-color: var(--midtone2);
+    color: var(--light);
 }
 

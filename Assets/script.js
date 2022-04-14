@@ -171,12 +171,12 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
     <div class="heading">
         <h3> ${gameTitle}</h3>
     </div>
-    <ul>
-        <li> ${platform}</li> 
-        <li> ${des}</li>
-        <li> ${releaseD}</li>
-        <li> ${dev}</li>
-        <li> ${publisher}</li>   
+    <ul class ="ul">
+        <li class="info" > ${platform}</li> 
+        <li class="info" > ${des}</li>
+        <li class="info"> ${releaseD}</li>
+        <li class="info"> ${dev}</li>
+        <li class="info"> ${publisher}</li>   
     </ul>`;
     
     infoC.innerHTML= infoTemplate;
