@@ -199,12 +199,12 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
             </header>
             <div class="card-content">
                 <div class="content">
-                    <thumbnail 
+                    <iframe 
                     class="thumbnail"
                     src="https://player.twitch.tv/?channel=${userN}&parent=https://canro2b.github.io/"
                     allowFullscreen="true"
                     >
-                </thumbnail>
+                </iframe>
                     <a target="_blank" href="https://www.twitch.tv/${userN}">https://www.twitch.tv/${userN}</a>
                     <p>${lStatus}</p>
                     <p>Viewers: ${vCount}</p>
