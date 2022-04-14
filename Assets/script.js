@@ -30,29 +30,36 @@ function free2GameFetch(platform, category,) {
             return res.json();
         })
         .then(function (data) {
-            //console.log(data)
             return data
         })
 }
 
+function displayGameInfo(object){
+    console.log(object);
+}
+
 //makes list of games using fetch from free2Game
 async function createGameList(x, y) {
-    gamesArray = [];
     olEl.empty();
     gameFetch = await free2GameFetch(x, y);
-
     for (i = 0; i < 10; i++) {
-        gamesArray.push(gameFetch[i].title)
+        let gameInfoObj ={
+                title: gameFetch[i].title,
+                gameUrl: gameFetch[i].game_url,
+                publiblisher: gameFetch[i].publisher,
+                releaseDate: gameFetch[i].release_date,
+                shortDiscriptions: gameFetch[i].short_description
+        }
         var listItem = $("<li>");
         var gameB = $("<button>")
         gameB.addClass("gameBtn");
-        gameB.text(gameFetch[i].title);
+        gameB.text(gameInfoObj.title);
         olEl.append(listItem);
         listItem.append(gameB);
         gameB.on("click", async function (event) {
             event.preventDefault();
+            displayGameInfo(gameInfoObj);
             var twitchGameId = await fetchGameId(event.target.innerHTML);
-            console.log(twitchGameId)
             getStreamInfo(twitchGameId);
 
         });
@@ -71,22 +78,12 @@ function getTwitchAuthorization() {
         });
 }
 
-//these variables are to test the twitchGrab function.
-
-var streamEndpoint = "streams?first=5&game_id"
-var gameEndpoint = "games?name="
-
-
 async function twitchGrab(endpoint) {
 
     let tokenObject = await getTwitchAuthorization();
-    console.log(tokenObject)
 
     let accesToken = tokenObject.access_token;
     let bearer = tokenObject.token_type;
-
-    console.log(accesToken);
-    console.log(bearer)
 
     bearer = bearer.substring(0, 1).toUpperCase() + bearer.substring(1, bearer.length);
 
@@ -110,7 +107,6 @@ async function twitchGrab(endpoint) {
 async function fetchGameId(gameTitle) {
     var fullEndpoint = `games?name=${gameTitle}`
     var twitchData = await twitchGrab(fullEndpoint);
-    console.log(twitchData);
     var gameId = twitchData.data[0].id;
     var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameId + "-300x400.jpg";
     gameImageEl.setAttribute("src", gamePic);
@@ -127,30 +123,30 @@ formEl.on("submit", function (event) {
 });
 
 // for loop to pull Streamer Data 
-for (var i = 0; i < 5; i++) {
-    var newDiv = document.createElement('div');
-    // newDiv.id = 'r' + i;
-    newDiv.setAttribute("class", "item-" + i)
-    var userName = document.createElement('h4');
-    var liveStatus = document.createElement('p');
-    var viewercount = document.createElement('p');
-    var link = document.createElement('a');
-    var thumbnail = document.createElement("iframe");
-    thumbnail.setAttribute("src", "https://player.twitch.tv/?channel=" + twitchData.data[i].user_name + "&parent=www.example.com")
-    thumbnail.frameBorder = 0;
-    thumbnail.allowFullscreen = "true";
-    thumbnail.style.height = 300;
-    thumbnail.style.width = 400;
-    userName.textContent = "Username: " + twitchData.data[i].user_name;
-    liveStatus.textContent = twitchData.data[i].type.toUpperCase();
-    viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
-    link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
-    link.setAttribute("target", "_blank");
-    link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
-    topTwitch.append(newDiv);
-    newDiv.append(userName); // topTwitch will change via HTML
-    newDiv.append(link);
-    newDiv.append(liveStatus);
-    newDiv.append(viewercount);
-    newDiv.append(thumbnail);
-}
+// for (var i = 0; i < 5; i++) {
+//     var newDiv = document.createElement('div');
+//     // newDiv.id = 'r' + i;
+//     newDiv.setAttribute("class", "item-" + i)
+//     var userName = document.createElement('h4');
+//     var liveStatus = document.createElement('p');
+//     var viewercount = document.createElement('p');
+//     var link = document.createElement('a');
+//     var thumbnail = document.createElement("iframe");
+//     thumbnail.setAttribute("src", "https://player.twitch.tv/?channel=" + twitchData.data[i].user_name + "&parent=www.example.com")
+//     thumbnail.frameBorder = 0;
+//     thumbnail.allowFullscreen = "true";
+//     thumbnail.style.height = 300;
+//     thumbnail.style.width = 400;
+//     userName.textContent = "Username: " + twitchData.data[i].user_name;
+//     liveStatus.textContent = twitchData.data[i].type.toUpperCase();
+//     viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
+//     link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
+//     link.setAttribute("target", "_blank");
+//     link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
+//     topTwitch.append(newDiv);
+//     newDiv.append(userName); // topTwitch will change via HTML
+//     newDiv.append(link);
+//     newDiv.append(liveStatus);
+//     newDiv.append(viewercount);
+//     newDiv.append(thumbnail);
+//}
