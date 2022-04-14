@@ -25,13 +25,14 @@ html{
 
 body{
     width: 100%;
+    min-height: 100%;
     height: fit-content;
     margin:0;
     padding:0;
 }
 
 header{
-    height: 20%;
+    height: fit-content;
     width: 100%;
     background-color: var(--lsBlue);
     color: var(--fLilac);
@@ -54,7 +55,7 @@ h4{
 }
 
 main{
-    height: 80%;
+    height: fit-content;
     width: 100%;
     margin:0;
     padding:0;
@@ -62,7 +63,7 @@ main{
 }
 
 .mContent{
-    height: 100%;
+    height: fit-content;
     width: 100%;
 }
 
@@ -169,7 +170,7 @@ li{
     padding: 10px;
     display: flex;
     text-align: left;
-    color: black;
+    color: var(--onyx);
   }
 
 button{
