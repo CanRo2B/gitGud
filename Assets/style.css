@@ -1,11 +1,11 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 :root{
-    --lsBlue: #8CC8EE;
-    --alabaster: #E2E8DD;
-    --onyx: #373E40;
-    --aViolet: #B17FC7;
-    --fLilac: #8B62A5;
+    --accent: #EE6352;
+    --light: #F2F3D9;
+    --dark: #2C092F;
+    --midtone1: #CAA8F5;
+    --midtone2: #9984D4;
 }
 
 *:not(h1){
@@ -21,6 +21,7 @@ html{
     width: 100%;
     min-height: 100%;
     max-height: fit-content;
+    background-color: var(--dark);
 }
 
 body{
@@ -29,13 +30,14 @@ body{
     height: fit-content;
     margin:0;
     padding:0;
+
 }
 
 header{
     height: fit-content;
     width: 100%;
-    background-color: var(--lsBlue);
-    color: var(--fLilac);
+    background-color: var(--midtone2);
+    color: var(--midtone1);
 }
 
 .title {
@@ -45,8 +47,10 @@ header{
     padding-top: 10pt;
 }
 
+
 #define{
     justify-content: center; 
+
     flex-direction: row;
 }
 
@@ -59,7 +63,7 @@ main{
     width: 100%;
     margin:0;
     padding:0;
-    background-color: var(--onyx);
+
 }
 
 .mContent{
@@ -74,7 +78,7 @@ section{
 #gameFind{
     display: flex;
     flex-flow: column nowrap;
-    color: var(--alabaster);
+    color: var(--light);
 }
 
 
@@ -83,7 +87,7 @@ section{
 }
 
 .uInput{
-    border-right: 2px solid var(--lsBlue);
+    border-right: 2px solid var(--midtone1);
 }
 
 .finder{
@@ -97,12 +101,11 @@ section{
 
 .gamesList{
     height: 60%;
-    background-color: var(--alabaster);
+    background-color: var(--light);
 }
 
 #formSubmit{
-    background-color: var(--fLilac);
-    color: var(--onyx);
+    background-color: var(--midtone1);
     padding-left: 10px;
     margin-top: 20px;
     margin-bottom: 25px;
@@ -118,33 +121,33 @@ section{
 }
 
 #top5{
-    border: 2pt solid var(--onyx);
+    border: 2pt solid var(--dark);
     /* height: 250pt;
     width: 200pt; */
 }
 
 #gameInfo {
-    border: 2pt solid var(--onyx);
+    border: 2pt solid var(--dark);
     /* height: 250pt;
     width: 200pt; */
 }
 
 #gamePic {
-    border: 1pt solid var(--onyx);
+    border: 1pt solid var(--dark);
     height: 100%;
 
 }
 
 
 #top-5{
-    border: 2pt solid var(--onyx);
+    border: 2pt solid var(--dark);
     height: 250pt;
     width: 200pt;
 }
 
 
 #gameTitle {
-    border: 2pt solid var(--onyx);
+    border: 2pt solid var(--dark);
     height: 250pt;
     width: 200pt;
 
@@ -162,8 +165,11 @@ iframe {
 
 li{
     list-style: none;
-    background-color: var(--aViolet);
-    border-bottom: var(--onyx) solid;
+
+    background-color: var(--midtone1);
+    border-bottom: var(--dark) solid;
+
+
 }
 
 .footer {
