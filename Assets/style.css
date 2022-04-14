@@ -184,3 +184,10 @@ nav{
 iframe {
     padding: 10px;
 }
+
+/* footer CSS */
+.🦶 {
+    padding: 20px;
+    text-align: center;
+    color: var(--textcolor);
+  }
