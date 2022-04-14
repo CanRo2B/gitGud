@@ -36,27 +36,6 @@ async function getStreamInfo(id) {
     var twitchData = await twitchGrab(fullEndpoint);
 }
 
-//makes list of games using fetch from free2Game
-async function createGameList(x, y) {
-    gamesArray = [];
-    olEl.empty();
-    gameFetch = await free2GameFetch(x, y);
-
-    for (i = 0; i < 10; i++) {
-        gamesArray.push(gameFetch[i].title)
-        var listItem = $("<li>");
-        var gameB = $("<button>")
-        gameB.addClass("gameBtn");
-        gameB.text(gameFetch[i].title);
-        olEl.append(listItem);
-        listItem.append(gameB);
-        gameB.on("click", async function (event) {
-            event.preventDefault();
-            clickHandler(event.target.innerHTML);
-        });
-    }
-}
-
 //this function makes the access token that is recquired each time we fetch from twitch
 function getTwitchAuthorization() {
     let url = `https://id.twitch.tv/oauth2/token?client_id=${twitchClientId}&client_secret=${twitchSecretId}&grant_type=client_credentials`;
@@ -69,11 +48,17 @@ function getTwitchAuthorization() {
         });
 }
 
-//these variables are to test the twitchGrab function.
-
-var streamEndpoint = "streams?first=5&game_id"
-var gameEndpoint = "games?name="
-
+async function fetchGameId(gameTitle) {
+    var fullEndpoint = `games?name=${gameTitle}`
+    var twitchData = await twitchGrab(fullEndpoint);
+    console.log(twitchData);
+    if(twitchData.data.length==0){
+        return "Sorry there's no twitch info for this game :(";
+    } else {
+        var gameId = twitchData.data[0].id;
+        return gameId;
+    }
+}
 
 async function twitchGrab(endpoint) {
 
@@ -105,13 +90,6 @@ async function twitchGrab(endpoint) {
         });
 }
 
-async function fetchGameId(gameTitle) {
-    var fullEndpoint = `games?name=${gameTitle}`
-    var twitchData = await twitchGrab(fullEndpoint);
-    var gameId = twitchData.data[0].id;
-    return gameId;
-}
-
 async function gameInfoGrab(raw ,chosenGame){
     var infoArr= []
     for(i=0;i<raw.length;i++){
@@ -141,6 +119,26 @@ formEl.on("submit", function(event){
     createGameList(platform, genre);
 });
 
+//makes list of games using fetch from free2Game
+async function createGameList(x, y) {
+    gamesArray = [];
+    olEl.empty();
+    gameFetch = await free2GameFetch(x, y);
+
+    for (i = 0; i < 10; i++) {
+        gamesArray.push(gameFetch[i].title)
+        var listItem = $("<li>");
+        var gameB = $("<button>")
+        gameB.addClass("gameBtn");
+        gameB.text(gameFetch[i].title);
+        olEl.append(listItem);
+        listItem.append(gameB);
+        gameB.on("click", async function (event) {
+            event.preventDefault();
+            clickHandler(event.target.innerHTML);
+        });
+    }
+}
 
 //function for assembling all necessary data into page elements (need to add pass variables to assemble carousel)
 async function generateContent(gameTitle, gameID, gameInfo){
@@ -149,7 +147,11 @@ async function generateContent(gameTitle, gameID, gameInfo){
     var releaseD= gameInfo[2];
     var dev= gameInfo[3];
     var publisher= gameInfo[4];
-    var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
+    if(gameID==="Sorry there's no twitch info for this game :("){
+        var gamePic = "./Assets/img/istockphoto-1285591330-170667a.jpg";
+    } else{
+        var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
+    }
     var infoTemplate=`
     <div class="heading">
         <h3> ${gameTitle}</h3>
@@ -165,31 +167,31 @@ async function generateContent(gameTitle, gameID, gameInfo){
     gameImageEl.setAttribute("src", gamePic);
 }
   
-for (var i = 0; i < 5; i++) {
-    var newDiv = document.createElement('div');
-    // newDiv.id = 'r' + i;
-    newDiv.setAttribute("class", "item-" + i)
-    var userName = document.createElement('h4');
-    var liveStatus = document.createElement('p');
-    var viewercount = document.createElement('p');
-    var link = document.createElement('a');
-    var thumbnail = document.createElement("iframe");
-    thumbnail.setAttribute("src", "https://player.twitch.tv/?channel=" + twitchData.data[i].user_name + "&parent=www.example.com")
-    thumbnail.frameBorder = 0;
-    thumbnail.allowFullscreen = "true";
-    thumbnail.style.height = 300;
-    thumbnail.style.width = 400;
-    userName.textContent = "Username: " + twitchData.data[i].user_name;
-    liveStatus.textContent = twitchData.data[i].type.toUpperCase();
-    viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
-    link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
-    link.setAttribute("target", "_blank");
-    link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
-    topTwitch.append(newDiv);
-    newDiv.append(userName); // topTwitch will change via HTML
-    newDiv.append(link);
-    newDiv.append(liveStatus);
-    newDiv.append(viewercount);
-    newDiv.append(thumbnail);
-}
+// for (var i = 0; i < 5; i++) {
+//     var newDiv = document.createElement('div');
+//     // newDiv.id = 'r' + i;
+//     newDiv.setAttribute("class", "item-" + i)
+//     var userName = document.createElement('h4');
+//     var liveStatus = document.createElement('p');
+//     var viewercount = document.createElement('p');
+//     var link = document.createElement('a');
+//     var thumbnail = document.createElement("iframe");
+//     thumbnail.setAttribute("src", "https://player.twitch.tv/?channel=" + twitchData.data[i].user_name + "&parent=www.example.com")
+//     thumbnail.frameBorder = 0;
+//     thumbnail.allowFullscreen = "true";
+//     thumbnail.style.height = 300;
+//     thumbnail.style.width = 400;
+//     userName.textContent = "Username: " + twitchData.data[i].user_name;
+//     liveStatus.textContent = twitchData.data[i].type.toUpperCase();
+//     viewercount.textContent = "Viewers: " + twitchData.data[i].viewer_count;
+//     link.setAttribute('href', "https://www.twitch.tv/" + twitchData.data[i].user_name);
+//     link.setAttribute("target", "_blank");
+//     link.innerHTML = "https://www.twitch.tv/" + twitchData.data[i].user_name
+//     topTwitch.append(newDiv);
+//     newDiv.append(userName); // topTwitch will change via HTML
+//     newDiv.append(link);
+//     newDiv.append(liveStatus);
+//     newDiv.append(viewercount);
+//     newDiv.append(thumbnail);
+// }
 
