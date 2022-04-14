@@ -4,8 +4,9 @@ var gamesArray = []
 
 const gameImageEl = document.querySelector("#gameImage");
 const carouselEl = $("#top5");
-const infoC = $("#gameInfo");
+const infoC = document.querySelector("#gameInfo");
 const olEl = $("#games");
+var formEl = $("#gameFind")
 const topTwitch = $("#carousel-demo");
 
 
@@ -150,9 +151,6 @@ formEl.on("submit", function(event){
     createGameList(platform, genre);
 });
 
-<<<<<<< HEAD
-=======
-
 //makes list of games using fetch from free2Game
 async function createGameList(x, y) {
     gamesArray = [];
@@ -201,4 +199,3 @@ async function generateContent(gameTitle, gameID, gameInfo){
     gameImageEl.setAttribute("src", gamePic);
 }
   
->>>>>>> 24d245d67a797b3ae46f4e37e2061555bb16d7b7
