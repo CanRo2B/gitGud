@@ -18,6 +18,7 @@ body{
     height: 100%;
     margin:0;
     padding:0;
+    background-color: var(--onyx);
 }
 
 header{
@@ -43,10 +44,6 @@ nav{
     color: inherit;
 }
 
-.thumbnail{
-    width: 300px;
-    height: 400px;
-}
 .nav-bar {
     justify-content: center;
     flex-direction: row;
@@ -75,9 +72,7 @@ form{
     color: var(--alabaster);
 }
 
-ol{
-    margin-left: 20px;
-}
+
 
 select{
     width: 100%;
@@ -92,7 +87,7 @@ select{
 }
 
 .finder{
-    height: 40%;
+    height: auto;
     padding-left: 10px;
     padding-right: 4px;
     display: flex;
@@ -102,22 +97,20 @@ select{
 
 .gamesList{
     height: 60%;
-    margin-left: 10px;
-    margin-right: 4px;
     background-color: var(--alabaster);
 }
 
 #formSubmit{
-    margin-top: 5px;
     background-color: var(--fLilac);
     color: var(--onyx);
     padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    height: auto;
+    line-height: 3.0;
 
 }
-#games{
-    border: 0.5px solid var(--alabaster);
-    padding-left: 10px;
-}
+
 
 #gameImage{
     width: 100%;
@@ -187,4 +180,18 @@ nav{
 
 iframe {
     padding: 10px;
+}
+
+li{
+    list-style: none;
+    background-color: var(--aViolet);
+    border-bottom: var(--onyx) solid;
+
+}
+
+button{
+    border: none;
+    min-height: 100%;
+    min-width: 100%;
+    line-height: 3.0;
 }
