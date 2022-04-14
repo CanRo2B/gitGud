@@ -201,7 +201,7 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
                 <div class="content">
                     <iframe 
                     class="thumbnail"
-                    src="https://player.twitch.tv/?channel=${userN}&parent=https:https://canro2b.github.io/gitGud//&muted=true"
+                    src="https://player.twitch.tv/?channel=${userN}&parent=canro2b.github.io&muted=true"
                     height="200"
                     width="300"
                     allowFullscreen="true"
