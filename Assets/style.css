@@ -8,8 +8,13 @@
     --fLilac: #8B62A5;
 }
 
+*:not(h1){
+  font-family: 'Rubik', sans-serif;
+}
+
 *{
     overflow-wrap: normal;
+
 }
 
 html{
@@ -32,25 +37,20 @@ header{
     color: var(--fLilac);
 }
 
-h1 {
+.title {
+    justify-content: center; 
+    flex-direction: row;
+    font-family: "Permanent Marker", sans-serif;
+    padding-top: 10pt;
+}
+
+#define{
     justify-content: center; 
     flex-direction: row;
 }
 
 h4{
     color: var(--aViolet);
-}
-
-nav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: inherit;
-}
-
-.nav-bar {
-    justify-content: center;
-    flex-direction: row;
 }
 
 main{
@@ -70,20 +70,15 @@ section{
     height:100%;
 }
 
-form{
+#gameFind{
     display: flex;
     flex-flow: column nowrap;
     color: var(--alabaster);
 }
 
 
-
-select{
+#sPlat{
     width: 100%;
-}
-
-.title {
-    padding-top: 10pt;
 }
 
 .uInput{
@@ -121,27 +116,6 @@ select{
     height: 100%;
 }
 
-
-h1 {
-    justify-content: center; 
-    flex-direction: row;
-}
-
-nav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
-}
-
-.nav-bar {
-    justify-content: center;
-    flex-direction: row;
-    border-bottom: 2pt solid var(--lsBlue);
-    padding: 10pt;
-
-}
-
 #top5{
     border: 2pt solid var(--onyx);
     /* height: 250pt;
@@ -159,7 +133,6 @@ nav{
     height: 100%;
 
 }
-
 
 
 #top-5{
@@ -186,20 +159,18 @@ iframe {
     padding: 10px;
 }
 
-
-/* footer CSS */
-.🦶 {
-    padding: 20px;
-    text-align: center;
-    color: var(--textcolor);
-  }
-
 li{
     list-style: none;
     background-color: var(--aViolet);
     border-bottom: var(--onyx) solid;
-
 }
+
+.footer {
+    padding: 10px;
+    display: flex;
+    text-align: left;
+    color: black;
+  }
 
 button{
     border: none;
