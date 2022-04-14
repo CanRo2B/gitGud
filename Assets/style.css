@@ -43,10 +43,6 @@ nav{
     color: inherit;
 }
 
-.thumbnail{
-    width: 300px;
-    height: 400px;
-}
 .nav-bar {
     justify-content: center;
     flex-direction: row;
