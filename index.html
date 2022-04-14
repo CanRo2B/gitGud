@@ -75,15 +75,11 @@
              <!-- Start Hero Carousel -->
 		          <section class="hero is-medium has-carousel">
 			          <div id="carousel-demo" class="hero-carousel">
-				          <div class="item-1">
-					      <!-- Slide Content -->
-				          </div>
-				          <div class="item-2">
-					      <!-- Slide Content -->
-				          </div>
-				          <div class="item-3">
-					      <!-- Slide Content -->
-				          </div>
+				         
+
+ 
+          
+				        
 			          </div>
 			          <div class="hero-head"></div>
 			          <div class="hero-body"></div>
@@ -97,9 +93,9 @@
            </article>
         </section>
       
-        <section id="gamePic" class="column is-parent is-one-quarter">
-          <figure>
-            <img id="gameImage" >
+        <section id="gamePic" class="column is-parent is-one-quarter is-covered">
+          <figure class="is-covered">
+            <img id="gameImage">
           </figure>
         </section>
       </div>
@@ -112,7 +108,8 @@
 		<script>
 			bulmaCarousel.attach('#carousel-demo', {
 				slidesToScroll: 1,
-				slidesToShow: 4
+				slidesToShow: 2,
+        infinite: true,
 			});
 		</script>
 <script type="text/javascript" src="./Assets/script.js"></script>
