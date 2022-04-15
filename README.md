@@ -34,7 +34,7 @@ After being prompted for basic preliminary information, the user will be present
 
 ## Credits
 
-- Molly Van Behren - https://github.com/VBamalie
+- Molly Von Behren - https://github.com/VBamalie
 - Lex Matthews - https://github.com/ArchRascal2988
 - Scott Gamit - https://github.com/sgamit09
 - Candace Robbins - https://github.com/CanRo2B
