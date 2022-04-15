@@ -98,14 +98,19 @@ main{
 }
 
 @keyframes backgroundPan{
-    0%   {background-position: -200px -300px;}
-    20%  {background-position: -250px -350px;}
-    50%  {background-position: -200px -300px;}
-    75%  {background-position: -150px -250px;}
+    0%   {background-position: 0 0;}
+    13%   {background-position: 0 0;}
+    26%   {background-position: 0 0;}
+    39%   {background-position: 0 0;}
+    52%   {background-position: 0 0;}
+    65%   {background-position: 0 0;}
+    78%   {background-position: 0 0;}
+    91%   {background-position: 0 0;}
+    100%   {background-position: 0 0;}
 }
 
 .mContent{
-    background-image:url("./img/istockphoto-1285591330-170667a.jpg");
+    background-image:url("./img/scroll.webp");
     background-size: cover;
     animation: backgroundPan 45s linear infinite;
     height: fit-content;
