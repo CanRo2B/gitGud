@@ -32,6 +32,7 @@ After being prompted for basic preliminary information, the user will be present
 ## Link
 - [gitHub] (https://github.com/CanRo2B/gitGud)
 - [Website] (https://canro2b.github.io/gitGud/)
+- [Presentation] (https://docs.google.com/presentation/d/1dxxLG3fXK0hKLrXxqnjXNZdT2sDGxVJ1sCRQjY_rzUY/edit?usp=sharing)
 
 ## Credits
 
