@@ -75,12 +75,19 @@ main{
 
 #define{
     justify-content: center; 
-
     flex-direction: row;
 }
 
 h4{
-    color: var(--midtone2);
+    color: var(--dark);
+    font-size: 24pt;
+    background-color: var(--midtone1);
+    font-weight: bold;
+}
+
+label {
+    font-size: 18pt;
+    padding-left: 5pt;
 }
 
 main{
