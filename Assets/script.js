@@ -8,13 +8,10 @@ const infoC = document.querySelector("#gameInfo");
 const olEl = $("#games");
 const formEl = $("#gameFind")
 
-
-
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId = "axxonlvfp1hw6c4omorwefqwjno7o0";
-var twitchUrl = "https://api.twitch.tv/helix/"
-var formEl = $("#gameFind")
+var twitchUrl = "https://api.twitch.tv/helix/";
 
 async function free2GameFetch(platform, category,){
     var url;
@@ -36,10 +33,10 @@ async function free2GameFetch(platform, category,){
 //put any side effects dealing with the stream information here!!!!!!!
 async function getStreamInfo(id) {
     var streamersArr= [];
-    var fullEndpoint = `streams?first=5&game_id=${id}`
+    var fullEndpoint = `streams?first=3&game_id=${id}`
     var twitchData = await twitchGrab(fullEndpoint);
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 3; i++) {
         var currSData= []
         currSData.push(twitchData.data[i].user_name);
         currSData.push(twitchData.data[i].type);
@@ -122,6 +119,7 @@ async function clickHandler(gameTitle){
     var gameID= await fetchGameId(gameTitle);
     var gameInfo= await gameInfoGrab(await free2GameFetch() ,gameTitle);
     var streamInfo= await getStreamInfo(gameID);
+    toggle();
     generateContent(gameTitle, gameID, gameInfo, streamInfo);
 }
 
@@ -174,18 +172,18 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
     <div class="heading">
         <h3> ${gameTitle}</h3>
     </div>
-    <ul>
-        <li> ${platform}</li> 
-        <li> ${des}</li>
-        <li> ${releaseD}</li>
-        <li> ${dev}</li>
-        <li> ${publisher}</li>   
+    <ul class ="ul">
+        <li class="info" > ${platform}</li> 
+        <li class="info" > ${des}</li>
+        <li class="info"> ${releaseD}</li>
+        <li class="info"> ${dev}</li>
+        <li class="info"> ${publisher}</li>   
     </ul>`;
     
     infoC.innerHTML= infoTemplate;
     gameImageEl.setAttribute("src", gamePic);
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 3; i++) {
         var userN= streamInfo[i][0];
         var lStatus= streamInfo[i][1];
         var vCount= streamInfo[i][2];
@@ -206,7 +204,7 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
                     allowFullscreen="true"
                     >
                 </iframe>
-                    <a target="_blank" href="https://www.twitch.tv/${userN}">https://www.twitch.tv/${userN}</a>
+                    <a target="_blank" href="https://www.twitch.tv/${userN}">Click Here to See Stream</a>
                     <p>${lStatus}</p>
                     <p>Viewers: ${vCount}</p>
                 </div>
@@ -216,3 +214,12 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
     }
 }
   
+function toggle(){
+    var hidden= document.querySelectorAll(".is-hidden");
+    console.log(hidden);
+    for(i=0;i<hidden.length;i++){
+        var cSec= hidden[i];
+        console.log(cSec);
+        cSec.classList.remove("is-hidden");
+    }
+}
