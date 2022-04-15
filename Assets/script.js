@@ -11,7 +11,7 @@ const formEl = $("#gameFind")
 //global variables for the twitch authorization
 const twitchClientId = "ddg5ztvzrbtcgwze0t9jbb6wqn5dj0";
 const twitchSecretId = "axxonlvfp1hw6c4omorwefqwjno7o0";
-var twitchUrl = "https://api.twitch.tv/helix/"
+var twitchUrl = "https://api.twitch.tv/helix/";
 
 async function free2GameFetch(platform, category,){
     var url;
@@ -119,6 +119,7 @@ async function clickHandler(gameTitle){
     var gameID= await fetchGameId(gameTitle);
     var gameInfo= await gameInfoGrab(await free2GameFetch() ,gameTitle);
     var streamInfo= await getStreamInfo(gameID);
+    toggle();
     generateContent(gameTitle, gameID, gameInfo, streamInfo);
 }
 
@@ -213,3 +214,12 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
     }
 }
   
+function toggle(){
+    var hidden= document.querySelectorAll(".is-hidden");
+    console.log(hidden);
+    for(i=0;i<hidden.length;i++){
+        var cSec= hidden[i];
+        console.log(cSec);
+        cSec.classList.remove("is-hidden");
+    }
+}
