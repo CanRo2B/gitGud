@@ -29,6 +29,9 @@ body{
     width: 100%;
     min-height: 100%;
     height: fit-content;
+    background-image: url(./img/scroll1.webp);
+    background-size: cover;
+    animation: backgroundPan 60s linear infinite;
     margin:0;
     padding:0;
 
@@ -40,11 +43,16 @@ header{
     background-color: var(--dark);
     color: var(--light);
     font-family: "Sarpanch:wght@900", sans-serif;
+}
+
+
+.footer{
+    background-color: var(--midtone2);
+    bottom: 0;
+    width: 100%;
+    color:var(--dark);
     border-bottom: var(--midtone2) solid;
     box-shadow: 50% 50% 50% var(--accent) in;
-    /* background-image: url(./img/virtual-retro-future-environment-concept-free-vector.jpg);
-    background-position: center;
-    background-image: cover; */
 }
 
 
@@ -119,19 +127,14 @@ h3{
 }
 
 @keyframes backgroundPan{
-    0%   {background-position: -200px -300px;}
-    20%  {background-position: -250px -350px;}
-    50%  {background-position: -200px -300px;}
-    75%  {background-position: -150px -250px;}
+    0%   {background-position: 320px -100px;}
+    50%  {background-position: 0 -100px;}
+    75%  {background-position: -320px -100px;}
+    100% {background-position: -680px -100px;}
 }
 
-body{
-    background-image:url("./img/istockphoto-1285591330-170667a.jpg");
-    background-size: cover;
-    animation: backgroundPan 45s linear infinite;
-    
-    height: 100%;
-    width: 100%;
+.mContent{
+    height: fit-content;
 }
 
 section{
@@ -154,6 +157,8 @@ section{
 }
 
 .uInput{
+    min-height: 880px;
+    border-right: 2px solid var(--midtone1);
     border-right: 2px solid var(--accent);
     height: 690px;
 }

@@ -161,13 +161,7 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
     var releaseD= gameInfo[2];
     var dev= gameInfo[3];
     var publisher= gameInfo[4];
-    
-    if(gameID==="Sorry there's no twitch info for this game :("){
-        var gamePic = "./Assets/img/istockphoto-1285591330-170667a.jpg";
-    } else{
-        var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
-    }
-    
+
     var infoTemplate=`
     <div class="heading">
         <h3> ${gameTitle}</h3>
@@ -179,6 +173,17 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
         <li class="info"> ${dev}</li>
         <li class="info"> ${publisher}</li>   
     </ul>`;
+    
+    if(gameID==="Sorry there's no twitch info for this game :("){
+        var gamePic = "./Assets/img/istockphoto-1285591330-170667a.jpg";
+        infoC.innerHTML= infoTemplate;
+        gameImageEl.setAttribute("src", gamePic);
+        for(i=0; i<3; i++){
+            topTwitch.html(`<h2>${gameID}</h2>`);
+        }
+    } else{
+        var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
+    }
     
     infoC.innerHTML= infoTemplate;
     gameImageEl.setAttribute("src", gamePic);
