@@ -2,7 +2,7 @@
 
 :root{
     --accent: #b938c2;
-    --light: #ffeedd;
+    --light: #ffddea;
     --dark: #2C092F;
     --midtone1: #CAA8F5;
     --midtone2: #9984D4;
@@ -22,7 +22,7 @@ html{
     width: 100%;
     min-height: 100%;
     max-height: fit-content;
-    background-color: var(--dark);
+    background-color: none;
 }
 
 body{
@@ -37,12 +37,14 @@ body{
 header{
     height: fit-content;
     width: 100%;
-    background-color: var(--midtone2);
+    background-color: var(--dark);
     color: var(--light);
     font-family: "Sarpanch:wght@900", sans-serif;
-    background-image: url(./img/virtual-retro-future-environment-concept-free-vector.jpg);
+    border-bottom: var(--midtone2) solid;
+    box-shadow: 50% 50% 50% var(--accent) in;
+    /* background-image: url(./img/virtual-retro-future-environment-concept-free-vector.jpg);
     background-position: center;
-    background-image: cover;
+    background-image: cover; */
 }
 
 
@@ -86,21 +88,24 @@ main{
 
 }
 .heading{
-    background-color: var(--midtone1);
+    background-color: var(--midtone2);
     color: var(--dark);
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
     box-shadow: 0.0125em 0.25em rgb(10, 10, 10/ 10%);
-    border-bottom: var(--midtone2) solid;
+    border-bottom: var(--midtone1) solid;
     margin-bottom: 0%;
     line-height: 3;
     background-color: var(--light);
     border: var(--accent) solid;
+    font-weight: 900;
+    
 }
-
 h3{
-    background-color: var(--midtone1);
+    background-color: var(--midtone2);
     font-size: 17px;
+    padding-left: 1%;
+    color: var(--light);
 }
 
 .ul{
@@ -120,11 +125,12 @@ h3{
     75%  {background-position: -150px -250px;}
 }
 
-.mContent{
+body{
     background-image:url("./img/istockphoto-1285591330-170667a.jpg");
     background-size: cover;
     animation: backgroundPan 45s linear infinite;
-    height: fit-content;
+    
+    height: 100%;
     width: 100%;
 }
 
@@ -143,9 +149,13 @@ section{
     width: 100%;
 }
 
+#sGenre {
+    width: 100%;
+}
+
 .uInput{
-    background-color: var(--dark);
-    border-right: 2px solid var(--midtone1);
+    border-right: 2px solid var(--accent);
+    height: 690px;
 }
 
 .finder{
@@ -159,7 +169,6 @@ section{
 
 .gamesList{
     height: 60%;
-    background-color: var(--midtone1);
 }
 
 
@@ -186,16 +195,16 @@ article.article{
     padding-top: 0;
 }
 #top5{
-    border: 2pt solid var(--dark);
+    background: transparent;
     /* height: 250pt;
     width: 200pt; */
     margin: 0, 2%
 }
 
 #gameInfo {
-    border: 2pt solid var(--dark);
     /* height: 250pt;
     width: 200pt; */
+    background: transparent;
 }
 
 .info{
@@ -203,15 +212,17 @@ article.article{
     margin: 0%;
     border: none;
     line-height: 3;
+    padding-left: 5%;
 }
 
 #gamePic {
     border: 1pt solid var(--dark);
     height: 100%;
     margin-top: 5%;
+    margin-right: 5%;
     padding: .3%;
     border: var(--accent) solid;
-
+    background-color: var(--light);
 }
 
 
@@ -246,6 +257,9 @@ li{
 
 }
 
+footer{
+    margin-top: auto;
+}
 .footer {
     padding: 10px;
     display: flex;
@@ -255,6 +269,7 @@ li{
     background-color: var(--midtone2);
     bottom: 0;
     width: 100%;
+
   }
 
 button{
@@ -282,3 +297,4 @@ button:active {
     color: var(--light);
     border-bottom: var(--accent) solid;
 }
+
