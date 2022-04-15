@@ -14,10 +14,11 @@ The gitGud project aims to reach gamers, or fresh faces in general, who want to 
 
 
 ## How to Use the Project
-After being prompted for basic preliminary information, the user will be presented with a list of games to choose from, populated from the open api "free2game".  Some genre examples include Battle Royale, MOBA and Strategy. After the user makes a game selection, theyll be shown a quick blurb about the title and the top 5 current Twitch streamers in order to watch and learn. The user can then navigate to another game quickly with the form still available and the top 10 games listed if they dont like what they see.  
+After being prompted for basic preliminary information, the user will be presented with a list of games to choose from, populated from the open api "free2game".  Some genre examples include Battle Royale, MOBA and Strategy. After the user makes a game selection, they willl be shown a quick blurb about the title and the top 5 current Twitch streamers in order to watch and learn. The user can then navigate to another game quickly with the form still available and the top 10 games listed if they dont like what they see.  
 
 
 ## Screenshot
+![alt text](./Assets/img/screencapture-canro2b-github-io-gitGud-2022-04-14-21_45_27.png)
 
 
 ## Languages Used
