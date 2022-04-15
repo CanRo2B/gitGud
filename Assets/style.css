@@ -38,6 +38,7 @@ body{
 }
 
 header{
+    overflow: hidden;
     height: fit-content;
     width: 100%;
     background-color: var(--dark);
@@ -45,6 +46,13 @@ header{
     font-family: "Sarpanch:wght@900", sans-serif;
 }
 
+a{
+    color: var(--accent);
+}
+
+a:hover{
+    color: var(--midtone1);
+}
 
 .footer{
     background-color: var(--midtone2);
@@ -107,8 +115,8 @@ main{
     background-color: var(--light);
     border: var(--accent) solid;
     font-weight: 900;
-    
 }
+
 h3{
     background-color: var(--midtone2);
     font-size: 17px;
@@ -221,6 +229,8 @@ article.article{
 }
 
 #gamePic {
+    position: relative;
+    right: 20px;
     border: 1pt solid var(--dark);
     height: 100%;
     margin-top: 5%;

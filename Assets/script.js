@@ -79,9 +79,6 @@ async function twitchGrab(endpoint) {
     let accesToken = tokenObject.access_token;
     let bearer = tokenObject.token_type;
 
-    console.log(accesToken);
-    console.log(bearer)
-
     bearer = bearer.substring(0, 1).toUpperCase() + bearer.substring(1, bearer.length);
 
     let authorization = `${bearer} ${accesToken}`
@@ -155,7 +152,6 @@ async function createGameList(x, y) {
 
 //function for assembling all necessary data into page elements (need to add pass variables to assemble carousel)
 async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
-    console.log(streamInfo);
     var platform= gameInfo[0];
     var des= gameInfo[1];
     var releaseD= gameInfo[2];
@@ -167,11 +163,11 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
         <h3> ${gameTitle}</h3>
     </div>
     <ul class ="ul">
-        <li class="info" > ${platform}</li> 
-        <li class="info" > ${des}</li>
-        <li class="info"> ${releaseD}</li>
-        <li class="info"> ${dev}</li>
-        <li class="info"> ${publisher}</li>   
+        <li class="info" >Platform: ${platform}</li> 
+        <li class="info" >Description: ${des}</li>
+        <li class="info">Release: ${releaseD}</li>
+        <li class="info">Developer: ${dev}</li>
+        <li class="info">Publisher: ${publisher}</li>   
     </ul>`;
     
     if(gameID==="Sorry there's no twitch info for this game :("){
@@ -181,6 +177,7 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
         for(i=0; i<3; i++){
             topTwitch.html(`<h2>${gameID}</h2>`);
         }
+        return;
     } else{
         var gamePic = "https://static-cdn.jtvnw.net/ttv-boxart/" + gameID + "-300x400.jpg";
     }
@@ -190,14 +187,13 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
 
     for (var i = 0; i < 3; i++) {
         var userN= streamInfo[i][0];
-        var lStatus= streamInfo[i][1];
+        var lStatus= streamInfo[i][1].toUpperCase();
         var vCount= streamInfo[i][2];
-        console.log(userN, lStatus, vCount);
 
         var streamerTemp= `
         <div class="card">
             <header class="card-header">
-                <p class="card-header-title">Username: ${userN}</p>
+                <p class="card-header-title">${userN}</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -221,10 +217,8 @@ async function generateContent(gameTitle, gameID, gameInfo, streamInfo){
   
 function toggle(){
     var hidden= document.querySelectorAll(".is-hidden");
-    console.log(hidden);
     for(i=0;i<hidden.length;i++){
         var cSec= hidden[i];
-        console.log(cSec);
         cSec.classList.remove("is-hidden");
     }
 }
