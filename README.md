@@ -18,7 +18,7 @@ After being prompted for basic preliminary information, the user will be present
 
 
 ## Screenshot
-![alt text](./Assets/img/screencapture-canro2b-github-io-gitGud-2022-04-14-21_45_27.png)
+![alt text](./Assets/img/screencapture-canro2b-github-io-gitGud-2022-04-15-09_42_02-edit.png)
 
 
 ## Languages Used
