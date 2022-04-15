@@ -29,6 +29,9 @@ body{
     width: 100%;
     min-height: 100%;
     height: fit-content;
+    background-image: url(./img/scroll1.webp);
+    background-size: 115%;
+    animation: backgroundPan 60s linear infinite;
     margin:0;
     padding:0;
 
@@ -72,7 +75,6 @@ main{
 
 #define{
     justify-content: center; 
-
     flex-direction: row;
 }
 
@@ -116,15 +118,13 @@ h3{
 }
 
 @keyframes backgroundPan{
-    0%   {background-position: 500px -100px;}
+    0%   {background-position: 350px -100px;}
     50%  {background-position: 0 -100px;}
-    100% {background-position: -500px -100px;}
+    75%  {background-position: -350px -100px;}
+    100% {background-position: -700px -100px;}
 }
 
 .mContent{
-    background-image: url(./img/scroll1.webp);
-    background-size: 115%;
-    animation: backgroundPan 60s linear infinite;
     height: fit-content;
     width: 100%;
 }
@@ -145,6 +145,7 @@ section{
 }
 
 .uInput{
+    height: 707px;
     background-color: var(--dark);
     border-right: 2px solid var(--midtone1);
 }
